@@ -26,10 +26,7 @@
 		
 		<nav>
 			<div class="navbar-element">
-				<a href="login.php">Login</a>
-			</div>
-			<div class="navbar-element">
-				<a href="register.php">Crear una cuenta</a>
+				<a href="auth.php">Iniciar sesión</a>
 			</div>
 		</nav>
 	</header>

@@ -10,6 +10,21 @@
 </head>
 <body>
 	<section class="container auth-container">
+		<div class="login auth">
+			<form method="POST">
+				<div>
+					<p>Usuario</p>
+					<input type="text" name="user" id="" placeholder="Darcy" autocomplete="off">
+				</div>
+				<div>
+					<p>Contraseña</p>
+					<input type="password" name="password" id="" placeholder="••••••">
+				</div>
+				<input type="submit" value="Login">
+			</form>	
+		</div>		
+	</section>
+	<section class="container auth-container">
 		<div class="register auth">
 			<form method="POST">
 				<div class="register-fields">
