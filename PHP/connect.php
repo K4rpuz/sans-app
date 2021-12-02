@@ -1,6 +1,6 @@
 <?php
 
-require_once config.php;
+require_once 'config.php';
 
 function connect(string $host, string $db, string $dbPort, string $user, string $pass) {
 	try{
@@ -12,4 +12,4 @@ function connect(string $host, string $db, string $dbPort, string $user, string 
 	}
 }
 
-return connect($host, $db, $dbPort, $user, $pass);
+return connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
