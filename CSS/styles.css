@@ -68,6 +68,10 @@ form p{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.hide{
+  display: none !important;
+}
+
 /* Barra superior */
 
 header{
@@ -210,4 +214,25 @@ nav a:hover{
 .register-fields{
   display: grid;
   grid-template-columns: 50% 50%;
+}
+
+#auth-options{
+  text-align: center; 
+}
+
+#toggle-auth{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem 2rem 1rem 2rem;
+  background-color: var(--maximum-red);
+  color: white;
+  border: none;
+  box-shadow: 1px 1px 1px black;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+#toggle-auth:hover{
+  padding: 1.2rem 2.2rem 1.2rem 2.2rem;
+  transition: padding .1s;
 }

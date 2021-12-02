@@ -55,9 +55,12 @@
 				</div>
 				<input type="submit" value="Crear cuenta">
 			</form>	
-		</div>
-		
+		</div>		
 	</section>
+	<div id="auth-options">
+		<button id="toggle-auth">Registrarse</button>
+	</div>
 	<script type="module" src="../JS/forms.js"></script>
+	<script type="module" src="../JS/auth.js"></script>
 </body>
 </html>
