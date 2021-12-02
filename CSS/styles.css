@@ -89,6 +89,10 @@ header img{
   align-items: center;
 }
 
+.logo-img{
+  cursor: pointer;
+}
+
 /* NavBar */ 
 
 nav{

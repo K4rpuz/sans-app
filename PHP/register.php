@@ -3,9 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" href="../img/logo.jpeg" type="image/x-icon">
-	<link rel="stylesheet" href="../styles/normalize.css">
-	<link rel="stylesheet" href="../styles/styles.css">
+	<link rel="shortcut icon" href="../IMG/logo.jpeg" type="image/x-icon">
+	<link rel="stylesheet" href="../CSS/normalize.css">
+	<link rel="stylesheet" href="../CSS/styles.css">
 	<title>SansApp</title>
 </head>
 <body>
@@ -43,6 +43,6 @@
 		</div>
 		
 	</section>
-	<script type="module" src="../js/forms.js"></script>
+	<script type="module" src="../JS/forms.js"></script>
 </body>
 </html>
