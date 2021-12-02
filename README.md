@@ -6,6 +6,10 @@
 
 ## Instrucciones
 
+```sql
+create user sansadmin with encrypted password 'admin' createdb login superuser;
+create database sansapp;
+```
 ---
 
 ## Aclaraciones
