@@ -3,8 +3,6 @@
 	$user = $_SESSION['user'];
 	if( empty($user) ) header("location: ../PHP/auth.php",true);
 	require_once 'header.php';
-	require 'connect.php';
-	$pdo =connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
 ?>
 	
 		
@@ -73,6 +71,13 @@
 				<button class="boton-cambio-password boton-azul boton">Cambiar contraseña</button>
 				<button class="boton-eliminar-cuenta boton-rojo boton">ELIMINAR CUENTA</button>
 			</div>	
+			<form action="" class="form-cambio-password hide">
+				<input type="password" name="password_actual" id="" placeholder="Contraseña actual">
+				<input type="password" name="password_nueva" id="" placeholder="Contraseña nueva">
+				<input type="hidden" name="request" value="cambio-password">
+				<input type="submit" class="boton boton-azul"value="Cambiar">
+			</form>
+			<p class="error-cambio-clave error hide"></p>
 		</div>
 		</section>	
 		<script type="module" src="../JS/busqueda.js"></script>

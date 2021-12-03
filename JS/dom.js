@@ -1,4 +1,6 @@
 
+import { dominio , path } from "./config.js";
+
 export const hideElement = ( element ) => {
 	element.classList.add('hide');
 }
@@ -22,4 +24,17 @@ export const loadElements = ( elementClasses ) => {
 
 export const updateNameNavBar = ( newName ) => {
 	document.querySelector('.nombre-usuario').innerHTML= newName;
+}
+
+export const makeAFetch = async ( path,parameters ) => {
+	const formData = new FormData();
+	parameters.forEach(parameter => {
+			formData.append(parameter[0], parameter[1]);
+	});
+	const response = await fetch(`${ dominio }/${ path }`,{
+			method: 'POST',
+			body: formData
+		});
+		const json = await response.json();
+		return json;
 }

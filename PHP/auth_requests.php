@@ -53,6 +53,7 @@
 			$query= "INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('$rol', '$user', '$password', '$email', TO_DATE('$birthday', 'YYYY-MM-DD'))";
 			try{
 				$results = $pdo->query($query);
+				login($user,$rol);
 				$pdo = null;		
 				responseAndDie('OK');
 			}catch(Exception $e){
