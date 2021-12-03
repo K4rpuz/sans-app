@@ -24,12 +24,12 @@ create database sansapp;
 - BD
 	- ~~tablas~~
 	- ~~2 triggers~~
-	- 2 vistas
+	- ~~2 vistas~~
 - Pagina Principal
 	- barra de busqueda (categorias, productos, usuarios)
 	- top 5 productos mejor promedio calificaciones
-	- top 5 productos mas vendidos
-	- top 5 usuarios con mas ventas
+	- ~~top 5 productos mas vendidos~~
+	- ~~top 5 usuarios con mas ventas~~
 - Barra de busqueda
 	- busqueda de productos y usuarios con nombre similar al buscado
 	- busqueda por categoria

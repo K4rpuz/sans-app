@@ -1,3 +1,5 @@
+DROP VIEW IF EXISTS top_vendedor;
+DROP VIEW IF EXISTS top_mas_vendidos;
 DROP TABLE IF EXISTS carrito;
 DROP TABLE IF EXISTS boleta;
 DROP TABLE IF EXISTS producto;
@@ -8,7 +10,7 @@ CREATE TABLE usuario (
 	rol VARCHAR(11) NOT NULL PRIMARY KEY,
 	usuario VARCHAR(20) NOT NULL,
 	contrasena VARCHAR(60) NOT NULL,
-	correo VARCHAR(30) NOT NULL,
+	correo VARCHAR(30) NOT NULL UNIQUE,
 	nacimiento DATE NOT NULL
 );
 
@@ -176,3 +178,8 @@ CALL comprar_producto('202030515-0', 7, 1);
 CALL comprar_producto('202030513-7', 8, 2);
 
 -- top 5 productos mas vendidos
+CREATE OR REPLACE VIEW top_mas_vendidos AS SELECT p.id, p.nombre, p.precio, p.vendedor, SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.producto GROUP BY p.id ORDER BY cantidad_vendida DESC LIMIT 5;
+
+-- top 5 vendedores con mas ventas
+CREATE OR REPLACE VIEW top_vendedor AS SELECT p.vendedor,(SELECT usuario FROM usuario WHERE rol=p.vendedor) ,SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.producto GROUP BY p.vendedor ORDER BY cantidad_vendida DESC LIMIT 5;
+
