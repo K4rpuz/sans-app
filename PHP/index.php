@@ -42,7 +42,14 @@
 	 
 	
 	foreach ($pdo->query('SELECT * FROM usuario') as $row) {
-		echo $row['rol'] . ' ' . $row['usuario'] . ' ' . $row['correo'] . '<br>';
+		$rol = $row['rol'];
+		$user = $row['usuario'];
+		$password = $row['contrasena'];
+		$email = $row['correo'];
+		$birthday = $row['nacimiento'];
+		$password = password_hash($password,PASSWORD_BCRYPT);
+		$query= "INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('$rol', '$user', '$password', '$email', TO_DATE('$birthday', 'YYYY-MM-DD'))";
+		echo $query . '<br>';
 	}
 
 ?>

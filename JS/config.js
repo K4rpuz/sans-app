@@ -1,8 +1,8 @@
 
-export const dominio = "http://localhost/sans-app/src";
+export const dominio = "http://localhost/sans-app/PHP";
 
 export const path = {
-	login: 'auth/login.php',
-	register: 'auth/register.php',
+	login: 'auth_requests.php',
+	register: 'auth_requests.php',
 	busqueda: 'store/search.php'
 }
