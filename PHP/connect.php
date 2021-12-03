@@ -12,4 +12,4 @@ function connect(string $host, string $db, string $dbPort, string $user, string 
 	}
 }
 
-return connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
+//return connect($dbHost, $db, $dbPort, $dbUser, $dbPass);

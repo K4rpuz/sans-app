@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS carrito;
+DROP TABLE IF EXISTS boleta;
+DROP TABLE IF EXISTS producto;
+DROP TABLE IF EXISTS usuario;
+
+
 CREATE TABLE usuario (
 	rol VARCHAR(11) NOT NULL PRIMARY KEY,
 	usuario VARCHAR(20) NOT NULL,
@@ -169,3 +175,4 @@ CALL comprar_producto('202030510-1', 6, 2);
 CALL comprar_producto('202030515-0', 7, 1);
 CALL comprar_producto('202030513-7', 8, 2);
 
+-- top 5 productos mas vendidos

@@ -1,3 +1,8 @@
+DROP TABLE carrito;
+DROP TABLE boleta;
+DROP TABLE producto;
+DROP TABLE usuario;
+
 CREATE TABLE usuario (
 	rol VARCHAR(11) NOT NULL PRIMARY KEY,
 	usuario VARCHAR(20) NOT NULL,
@@ -200,3 +205,6 @@ BEGIN
 	RETURN cantidad_disponible;
 END;
 $$;
+
+
+SELECT p.id, p.nombre, b.cantidad AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.producto;
