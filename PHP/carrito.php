@@ -1,5 +1,38 @@
 <?php
 	require_once "header.php";
+	require_once 'request_processing.php';
+	$rol = getOrGoLogin('rol');
+
+	if(isset($_POST['action'])){
+		switch ($_POST['action']) {
+			case 'eliminar':
+				$formsubData = loadForm(array('producto_id' => 'text'));
+				$pdo->exec("DELETE FROM carrito WHERE rol_usuario='$rol' AND id_producto = ".$formsubData['PRODUCTO_ID']);
+				break;
+			case 'comprar':
+				foreach($pdo->query("SELECT id,cantidad FROM view_carrito WHERE rol_usuario='$rol'") as $row){
+					try{
+						$pdo->exec("CALL comprar_producto('$rol', ".$row['id'].", ".$row['cantidad'].")");
+					}catch (PDOException $e) {
+						echo $e->getMessage();
+					}
+					$pdo->exec("DELETE FROM carrito WHERE rol_usuario='$rol' AND id_producto = ".$row['id']);
+				}
+				break;
+			case 'change_cantidad':
+				$cantidad = isset($_POST['btn'])?$_POST['btn']:$_POST['producto_cantidad'];
+				
+				try{
+					$pdo->exec("CALL agregar_producto_carrito('$rol', ".$_POST['producto_id'].", $cantidad)");
+				}catch (PDOException $e) {
+					echo $e->getMessage();
+				}
+				break;
+		}
+
+		header('Location: carrito.php');
+	}
+	
 ?>
 
 <div class="container">
@@ -9,24 +42,26 @@
 			<hr>
 			<div class="div_carrito">
 				<div class="productos_carrito">
-				<form action="carrito_requests.php" method="post">
 					
 					<?php
-					if(isset($_SESSION["rol"])){
-						foreach($pdo->query("SELECT id,nombre,precio,cantidad,stock,subtotal FROM view_carrito WHERE rol_usuario='".$_SESSION['rol']."'") as $row) {
+					{ 
+					$total = 0;
+					foreach($pdo->query("SELECT id,nombre,precio,cantidad,stock,subtotal FROM view_carrito WHERE rol_usuario='$rol'") as $row) {
+						$total += $row["subtotal"];
 					?>
 					<article class="producto_carrito">
 						<div class="producto_info">	
 							<div class="producto_decription">
-								<input type="checkbox" name="id">
 								<h2><a href="sans-app/PHP/producto/<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></a></h2>
 							</div>
 							<div class="ui_cantidad">
-								<form action="carrito_requests.php" method="post">
-									<!--<input type="submit" value="-" class="disminuir_producto" name="btn_producto_cantidad">-->
-									<input type="number" min="1" max="<?php echo $row['stock'] ?>" name="producto_cantidad" class="cantidad_producto" value="<?php echo $row['cantidad'] ?>">
+								<form action="carrito.php" method="post" id="form-cantidad-producto_<?php echo $row['id'] ?>">
+									<input type="hidden" name="producto_id" value="<?php echo $row['id'] ?>">	
+									<input type="hidden" name="action" value="change_cantidad">
+									<button type="submit" name="btn" <?php echo ($row['cantidad']<=1)?'disabled':'value="'.($row['cantidad']-1).'"'?> class="btn_producto_cantidad">-</button>
+									<input type="text" name="producto_cantidad" class="input_cantidad_producto" id="<?php echo $row['stock'].','.$row['cantidad'].','.$row['id'] ?>" value="<?php echo $row['cantidad'] ?>" autocomplete="off">
 									<span class="stock_producto"><?php echo $row['stock'] ?> disponibles</span>
-									<!--<input type="submit" value="+" class="aumentar_producto" name="btn_producto_cantidad">-->
+									<button type="submit" name="btn" <?php echo ($row['stock']==$row['cantidad'])?'disabled':'value="'.($row['cantidad']+1).'"' ?> class="btn_producto_cantidad">+</button>
 								</form>
 							</div>
 							<div class="producto_precio">
@@ -37,9 +72,9 @@
 						<div class="producto_actions">
 							<ul class="actions_list">
 								<li>
-									<form action="carrito_requests.php" method="post">
-										<input type="hidden" name="producto_id" value="id">
-										<input type="submit" value="Eliminar">
+									<form action="carrito.php" method="post" id="form-borrar-producto">
+										<input type="hidden" name="producto_id" value="<?php echo $row['id'] ?>">
+										<input type="submit" name="action" value="eliminar">
 									</form>
 								</li>
 							</ul>
@@ -49,9 +84,13 @@
 
 					
 					<div class="compra_carrito">
-						
+						<form action="carrito.php" method="post" id="form-compra-carrito">
+						<input type="hidden" name="action" value="comprar">
+						<span class="total_carrito">Total: <?php echo $total ?></span>
+						<input type="submit" value="Comprar">
+						</form>
 					</div>
-				</form>
+
 				</div>
 			</div>
 			
@@ -60,6 +99,7 @@
 		</div>
 	</div>
 </div>
+<script type="module" src="../JS/carrito.js"></script>
 
 <?php
 	require_once "footer.php";
