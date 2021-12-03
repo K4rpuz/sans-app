@@ -31,6 +31,7 @@ CREATE TABLE producto (
 CREATE TABLE boleta (
 	id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	rol_comprador VARCHAR(11) NOT NULL,
+	rol_vendedor VARCHAR(11) NOT NULL,
 	id_producto INT NOT NULL,
 	nombre_producto VARCHAR(30) NOT NULL,
 	fecha DATE NOT NULL,
@@ -95,7 +96,7 @@ BEGIN
 		RAISE EXCEPTION 'No hay suficiente stock';
 	END IF;
 
-	INSERT INTO boleta (rol_comprador, id_producto, nombre_producto, fecha, cantidad, precio_unidad) VALUES (rol_comprador, id_producto, (SELECT nombre FROM producto WHERE id = id_producto), CURRENT_DATE, cantidad, (SELECT precio FROM producto WHERE id = id_producto));
+	INSERT INTO boleta (rol_comprador,rol_vendedor, id_producto, nombre_producto, fecha, cantidad, precio_unidad) VALUES (rol_comprador,(SELECT vendedor FROM producto WHERE id = id_producto), id_producto, (SELECT nombre FROM producto WHERE id = id_producto), CURRENT_DATE, cantidad, (SELECT precio FROM producto WHERE id = id_producto));
 END;
 $$;
 

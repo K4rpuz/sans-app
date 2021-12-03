@@ -1,3 +1,7 @@
+<?php
+	require 'connect.php';
+	$pdo =connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

@@ -1,7 +1,5 @@
 <?php
 	require_once 'header.php';
-	require 'connect.php';
-	$pdo =connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
 ?>
 
 
@@ -38,11 +36,11 @@
 	<script type="module" src="../JS/busqueda.js"></script>
 
 <?php
-	require 'footer.php';
 	 
-	
-	foreach ($pdo->query("SELECT id,nombre,precio,cantidad,stock,subtotal FROM view_carrito WHERE rol_usuario='".$_SESSION['rol']."'") as $row) {
-		echo $row['nombre'].' '.$row['cantidad'].'<br>';
-	}
+	 foreach ($pdo->query("SELECT id,nombre,precio,cantidad,stock,subtotal FROM view_carrito WHERE rol_usuario='".$_SESSION['rol']."'") as $row) {
+		 echo $row['nombre'].' '.$row['cantidad'].'<br>';
+		}
+		
 
+	require 'footer.php';
 ?>
