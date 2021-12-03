@@ -16,7 +16,15 @@
 		
 		<nav>
 			<div class="navbar-element">
-				<a href="auth.php">Iniciar sesión</a>
+				<?php
+						session_start();
+						$user = $_SESSION['user'];
+						if( empty($user) ) echo '<a href="auth.php">Iniciar Sesión</a>';
+						else{
+							echo '<a href="perfil.php">'.$user.'</a>';	
+							echo '<a href="auth.php">Logout</a>';	
+						} 
+				?>
 			</div>
 		</nav>
 	</header>
