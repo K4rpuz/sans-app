@@ -310,7 +310,7 @@ nav a:hover{
   margin-top: 5rem;
   margin-bottom: 5rem;
   width: 70rem;
-  height: 45rem;
+  height: 50rem;
   padding: 5rem;
   float: left;
   text-align: center;
@@ -361,5 +361,14 @@ nav a:hover{
   margin-left: 1rem;
 }
 
-
+.form-cambio-password{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.form-cambio-password input{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
