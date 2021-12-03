@@ -35,7 +35,9 @@
 </html>
 <?php
 
-	$pdo = require 'connect.php';
+	require 'connect.php';
+	echo "CHUPALO";
+	$pdo = connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
 	foreach ($pdo->query('SELECT * FROM usuario') as $row) {
 		echo $row['rol'] . ' ' . $row['usuario'] . ' ' . $row['correo'] . '<br>';
 	}

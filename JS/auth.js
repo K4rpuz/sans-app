@@ -1,8 +1,10 @@
 import { hideElement, loadElements, showElement } from './dom.js';
+import {loadForm} from './forms.js';
+import { path } from './config.js';
 
 document.addEventListener("DOMContentLoaded", () => {
-	const [ loginContainer,registerContainer ] = loadElements([
-		'login','register'
+	const [ loginContainer,registerContainer, formLogin, formRegister ] = loadElements([
+		'login','register','form-login','form-register'
 	]);
 
 	hideElement(registerContainer);
@@ -20,4 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		hideElement(container);
 	});
+
+	const [ infoLogin, postLogin ] = loadForm('form-login',() => {});
+
+	formLogin.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const resp = await postLogin(path.login);
+		console.log(resp);
+	});
+
+	const [ infoRegister, postRegister ] = loadForm('form-register',()=>{});
+	
+	formRegister.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const resp = await postRegister(path.register);
+		console.log(resp);
+	});
+
 });

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,7 +12,7 @@
 <body>
 	<section class="container auth-container">
 		<div class="login auth">
-			<form method="POST">
+			<form method="POST" class="form-login">
 				<div>
 					<p>Usuario</p>
 					<input type="text" name="user" id="" placeholder="Darcy" autocomplete="off">
@@ -21,12 +22,13 @@
 					<input type="password" name="password" id="" placeholder="••••••">
 				</div>
 				<input type="submit" value="Login">
+				<input type="hidden" name="request" value="LOGIN">
 			</form>	
 		</div>		
 	</section>
 	<section class="container auth-container">
 		<div class="register auth">
-			<form method="POST">
+			<form method="POST" class="form-register">
 				<div class="register-fields">
 					<div>
 						<p>Rol</p>
@@ -54,6 +56,7 @@
 					</div>
 				</div>
 				<input type="submit" value="Crear cuenta">
+				<input type="hidden" name="request" value="REGISTER">
 			</form>	
 		</div>		
 	</section>
