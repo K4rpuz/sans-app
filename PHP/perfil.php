@@ -12,7 +12,7 @@
 	<header>
 		
 		<div class="header-element">
-			<a href="#" class="logo-img">
+			<a href="index.php" class="logo-img">
 				<img src="../IMG/logo.jpeg" alt="logo">
 			</a>
 			<section class="barra-busqueda">	
@@ -37,23 +37,49 @@
 			</div>
 		</nav>
 	</header>
-
-	<section class="perfil">
-		<div class="perfil-nombre">
-			<p><?php echo $_SESSION['user'] ?> </p>
-		</div>
-		<?php
-			$query = "SELECT * FROM usuario";
-			$pdo =connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
-			$pdo->query($query);
-		?>
-		<div class="perfil-correo">
-			<p> <?php
+		<section class="container perfil-container">
+			<div class="perfil-layout">
+				<h3>Información personal</h3>
 				
-			?> </p>
+				<div class="perfil-info">
+					<div class="perfil-nombre">
+						<p><span class="bold">Nombre</span></p>
+						<p> <?php echo $user ?> </p>
+						<a href="#" class="boton-editar-nombre"><img src="../IMG/editar.png" alt=""></a>
+					</div>
+					<?php
+						require 'connect.php';
+						$rol = $_SESSION['rol'];
+						$query = "SELECT correo FROM usuario WHERE rol='$rol'";
+						$pdo = connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
+						$correo = "";
+						foreach( $pdo->query($query) as $fila){
+							$correo = $fila['correo'];
+						}
+					?>
+					<div class="perfil-correo">
+						<p><span class="bold">Correo</span></p>
+						<p> <?php
+							echo $correo;	
+							?>
+						</p>
+						<a href="#" class="boton-editar-correo"><img src="../IMG/editar.png" alt=""></a>
+					</div>	
+				</div>
 		</div>
-	</section>
-	
-	<script type="module" src="../JS/busqueda.js"></script>
+			<div class="perfil-layout">
+				<h3>Opciones</h3>
+				<div class="perfil-opciones">
+					<form action="">
+						<button type="submit" class="boton-rojo boton">Historial de compra</button>
+					</form>
+					<form action="">
+						<button type="submit" class="boton-amarillo boton">Historial de venta</button>
+					</form>
+					<button class="boton_cambio_password boton-azul boton">Cambiar contraseña</button>
+				</div>	
+			</div>
+		</section>	
+		<script type="module" src="../JS/busqueda.js"></script>
 </body>
 </html>
