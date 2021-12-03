@@ -21,7 +21,7 @@
 						$user = $_SESSION['user'];
 						if( empty($user) ) echo '<a href="auth.php">Iniciar Sesión</a>';
 						else{
-							echo '<a href="perfil.php">'.$user.'</a>';	
+							echo '<a href="perfil.php" class="nombre-usuario">'.$user.'</a>';	
 							echo '<a href="auth.php">Logout</a>';	
 						} 
 				?>
