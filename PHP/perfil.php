@@ -15,7 +15,11 @@
 				<div class="perfil-info">
 					<div class="perfil-nombre">
 						<p><span class="bold">Nombre</span></p>
-						<p> <?php echo $user ?> </p>
+						<p class="p-nombre"> <?php echo $user ?> </p>
+						<form action="perfil_requests.php" class="form-cambio-nombre hide">
+							<input type="hidden" name="request" value="cambio-nombre">
+							<input type="text" name="user" id="" placeholder="Papa Francisco">
+						</form>
 						<a href="#" class="boton-editar-nombre"><img src="../IMG/editar.png" alt=""></a>
 					</div>
 					<?php
@@ -28,10 +32,14 @@
 					?>
 					<div class="perfil-correo">
 						<p><span class="bold">Correo</span></p>
-						<p> <?php
+						<p class="p-correo"> <?php
 							echo $correo;	
 							?>
 						</p>
+						<form action="perfil_requests.php" class="form-cambio-correo hide">
+							<input type="hidden" name="request" value="cambio-correo">
+							<input type="text" name="correo" id="" placeholder="Papa_Francisco@vaticano.cl">
+						</form>
 						<a href="#" class="boton-editar-correo"><img src="../IMG/editar.png" alt=""></a>
 					</div>	
 				</div>
@@ -43,8 +51,8 @@
 				<div class="perfil-compras">
 							<p><span class="bold">Compras</span></p>
 							<p> <?php echo $user ?> </p>
-						<form action="">
-							<button type="submit" class="boton-rojo boton">Historial de compra</button>
+						<form action="historial.php">
+							<button type="submit" class="boton-rojo boton boton-historial-compra">Historial de compra</button>
 						</form>
 				</div>
 				<div class="perfil-ventas">
@@ -53,8 +61,8 @@
 								echo $correo;	
 								?>
 							</p>
-						<form action="">
-							<button type="submit" class="boton-amarillo boton">Historial de venta</button>
+						<form action="historial.php">
+							<button type="submit" class="boton-amarillo boton boton-historial-venta">Historial de venta</button>
 						</form>
 				</div>		
 			</div>
@@ -68,5 +76,6 @@
 		</div>
 		</section>	
 		<script type="module" src="../JS/busqueda.js"></script>
+		<script type="module" src="../JS/perfil.js"></script>
 </body>
 </html>

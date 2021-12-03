@@ -19,3 +19,7 @@ export const loadElements = ( elementClasses ) => {
 	});
 	return elements;
 }
+
+export const updateNameNavBar = ( newName ) => {
+	document.querySelector('.nombre-usuario').innerHTML= newName;
+}
