@@ -49,7 +49,7 @@
 		$birthday = $row['nacimiento'];
 		$password = password_hash($password,PASSWORD_BCRYPT);
 		$query= "INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('$rol', '$user', '$password', '$email', TO_DATE('$birthday', 'YYYY-MM-DD'))";
-		echo $query . '<br>';
+		echo $query . ' -- '.$row['contrasena'].'<br>';
 	}
 
 ?>

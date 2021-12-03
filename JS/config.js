@@ -1,5 +1,5 @@
 
-export const dominio = "http://localhost/sans-app/PHP";
+export const dominio = "/sans-app/PHP";
 
 export const path = {
 	login: 'auth_requests.php',

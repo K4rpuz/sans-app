@@ -138,16 +138,16 @@ END;
 $$;
 
 -- inserts
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030533-1', 'Esteban Naranjo', '12345678', 'esteban.naranjo@usm.cl', TO_DATE('03-03-2002', 'DD-MM-YYYY'));
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030538-2', 'Fernando Amthauer', '12345678', 'fernando.amthauer@usm.cl', TO_DATE('04-05-2000', 'DD-MM-YYYY'));
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030513-7', 'Nicolas Ramirez', '12345678', 'nicolas.ramirez@usm.cl', TO_DATE('05-06-1999', 'DD-MM-YYYY'));
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030523-8', 'Nilsson Acevedo', '12345678', 'nilsson.acevedo@usm.cl', TO_DATE('06-07-1998', 'DD-MM-YYYY'));
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030536-5', 'Sebastian Gonzalez', 'asd55a96', 'sebastian.gonzales@usm.cl', TO_DATE('07-08-1997', 'DD-MM-YYYY'));
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030549-4', 'Sebastian Naranjo', '12345678', 'sebastian.naranjo@usm.cl', TO_DATE('08-09-1996', 'DD-MM-YYYY'));
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030510-1', 'Sergio Gonzalez', '12345678', 'sergio.gonzales@usm.cl', TO_DATE('09-10-1995', 'DD-MM-YYYY'));
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030515-0', 'Manuel Fernandez', '12345678', 'manuel.fernandez@usm.cl', TO_DATE('10-11-1994', 'DD-MM-YYYY'));
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030520-3', 'Juan Perez', '12345678', 'juan.perez@usm.cl', TO_DATE('11-12-1993', 'DD-MM-YYYY'));
-INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030525-8', 'Juan Amthauer', '12345678', 'juan.amthauer@usm.cl', TO_DATE('12-01-1992', 'DD-MM-YYYY'));
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030533-1', 'Esteban Naranjo', '$2y$10$kq2ODfn/iZ2OPDlBGLeTCOebS.nLQ3Qgvn1Y7bUF0dxKkbg4RkFq2', 'esteban.naranjo@usm.cl', TO_DATE('2002-03-03', 'YYYY-MM-DD')); -- 12345678
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030538-2', 'Fernando Amthauer', '$2y$10$zQXQO1yfSn4qgpOMRAnm2.FAbRwyo3z4mNDViaoCX2CENXNzLqFky', 'fernando.amthauer@usm.cl', TO_DATE('2000-05-04', 'YYYY-MM-DD')); -- 12345678
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030513-7', 'Nicolas Ramirez', '$2y$10$NtIn3X5v4kUblmgJzFgJAuosUJ16G99zuFXFtYR0BG8o3gxifErCC', 'nicolas.ramirez@usm.cl', TO_DATE('1999-06-05', 'YYYY-MM-DD')); -- 12345678
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030523-8', 'Nilsson Acevedo', '$2y$10$5/jOedNq7zqNc0UOUJSJsu1qS9e4iQ3etHmWeQjgv/8IGewZfPv7G', 'nilsson.acevedo@usm.cl', TO_DATE('1998-07-06', 'YYYY-MM-DD')); -- 12345678
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030536-5', 'Sebastian Gonzalez', '$2y$10$Z34G3dmCddFr/waJIepEE.mZuXqzk3VeBdF9uEoM4BfXMM6aSx8rm', 'sebastian.gonzales@usm.cl', TO_DATE('1997-08-07', 'YYYY-MM-DD')); -- asd55a96
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030549-4', 'Sebastian Naranjo', '$2y$10$LthakVrf/i34okq9s7qk7e7o70MKjLVM5mLmq/HbYKDnd9bkmCusW', 'sebastian.naranjo@usm.cl', TO_DATE('1996-09-08', 'YYYY-MM-DD')); -- 12345678
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030510-1', 'Sergio Gonzalez', '$2y$10$Nwg/HsKqyQa7lkU2mexgyOjQpKzzTyCha0VuZHPY4r1yuVJeq463S', 'sergio.gonzales@usm.cl', TO_DATE('1995-10-09', 'YYYY-MM-DD')); -- 12345678
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030515-0', 'Manuel Fernandez', '$2y$10$98R61qo0WBmFOr.p/RnITeePEoYLvxxQZqqNNKFTRJDvb9xLm2lB.', 'manuel.fernandez@usm.cl', TO_DATE('1994-11-10', 'YYYY-MM-DD')); -- 12345678
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030520-3', 'Juan Perez', '$2y$10$E/WEJpx2l97TxQMCGYKDdeduISnkO8u07d3F3r5rHICXsQ.hXUoD.', 'juan.perez@usm.cl', TO_DATE('1993-12-11', 'YYYY-MM-DD')); -- 12345678
+INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('202030525-8', 'Juan Amthauer', '$2y$10$iDWcw2.cTWfxNoptacIOwepX5EFKyVtTGWG4HrwYfeD13gOXxvnK.', 'juan.amthauer@usm.cl', TO_DATE('1992-01-12', 'YYYY-MM-DD')); -- 12345678
 
 INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('llavero SansAPP', 'Llavero con el logo de SansApp', '100', '100', 'Accesorios', '202030533-1');
 
