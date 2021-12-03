@@ -3,7 +3,7 @@
 	<header>
 		
 		<div class="header-element">
-			<a href="#" class="logo-img">
+			<a href="index.php" class="logo-img">
 				<img src="../IMG/logo.jpeg" alt="logo">
 			</a>
 			<section class="barra-busqueda">	
