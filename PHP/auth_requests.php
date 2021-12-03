@@ -1,39 +1,63 @@
 <?php	
 	require 'connect.php';
 	require_once('request_processing.php');
+
+	function login($user,$rol){
+		session_start();
+		$_SESSION['user'] = $user;
+		$_SESSION['rol'] = $rol;
+	}
+
 	$formData = loadForm(array(
 		'request' => 'text',
-		'user' => 'text',
+		'rol' => 'text',
 		'password' => 'password'
 	));
 	$request = $formData['REQUEST'];
-	$user = $formData['USER'];
+	$rol = $formData['ROL'];
 	$password = $formData['PASSWORD'];
 
 	switch($request){
 		case "LOGIN":
+			$pdo = connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
+			$query = "SELECT contrasena, usuario FROM usuario WHERE rol='$rol'";
+			try{
+				$results = $pdo->query($query);
+				foreach( $results as $fila ){
+					$pass = $fila['contrasena'];
+					$user = $fila['usuario'];
+				}
+				$pdo = null;
+				if( password_verify($password,$pass) ) {
+					login($user,$rol);
+					responseAndDie('OK');
+				}
+				else responseAndDie('Usuario o contraseña no existente.');
+			}catch(Exception $e){
+				responseAndDie('ERROR');
+			}
 			break;
 		case "REGISTER":
 			$formData = loadForm(array(
-				'rol' => 'text',
+				'user' => 'text',
 				'email' => 'email',
 				'birthday' => 'date',
 				'password-confirm' => 'password'
 			));	
-			$rol = $formData['ROL'];
+			$user = $formData['USER'];
 			$email = $formData['EMAIL'];
 			$birthday = $formData['BIRTHDAY'];
 			if( $password !== $formData['PASSWORD-CONFIRM'] ) responseAndDie('ERROR Contraseñas no coinciden');
+			$password = password_hash($password,PASSWORD_BCRYPT);
 			$pdo = connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
-			$birthday = '12-12-2012';
-			$query= "INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('$rol', '$user', '$password', '$email', TO_DATE('$birthday', 'DD-MM-YYYY'))";
-			$pdo->query("SELECT * FROM usuario");
-
-			responseAndDie("ESTA ES LA QUERY: ".$query);
-			if($results->fetch()){
+			$query= "INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('$rol', '$user', '$password', '$email', TO_DATE('$birthday', 'YYYY-MM-DD'))";
+			try{
+				$results = $pdo->query($query);
+				$pdo = null;		
 				responseAndDie('OK');
-			}else{
-				responseAndDie('ERROR: ');
+			}catch(Exception $e){
+				if( $e->getCode() === '23505' ) responseAndDie("Error: rol_ocupado");
+				else responseAndDie( $e->getMessage() );
 			}
 			break;
 	}

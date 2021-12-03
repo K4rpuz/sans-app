@@ -11,4 +11,4 @@ function connect(string $host, string $db, string $dbPort, string $user, string 
 		die("Connection failed: " . $e->getMessage());
 	}
 }
-
+//return connect($dbHost, $db, $dbPort, $dbUser, $dbPass);

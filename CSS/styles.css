@@ -72,6 +72,13 @@ form p{
   display: none !important;
 }
 
+.error{
+  color: red;
+  font-size: 3rem;
+  margin: 4rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 /* Barra superior */
 
 header{

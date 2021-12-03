@@ -14,8 +14,8 @@
 		<div class="login auth">
 			<form method="POST" class="form-login">
 				<div>
-					<p>Usuario</p>
-					<input type="text" name="user" id="" placeholder="Darcy" autocomplete="off">
+					<p>Rol</p>
+					<input type="text" name="rol" id="" placeholder="202030538-2" autocomplete="off">
 				</div>
 				<div>
 					<p>Contraseña</p>
@@ -62,6 +62,7 @@
 	</section>
 	<div id="auth-options">
 		<button id="toggle-auth">Registrarse</button>
+		<p class="error"></p>
 	</div>
 	<script type="module" src="../JS/forms.js"></script>
 	<script type="module" src="../JS/auth.js"></script>

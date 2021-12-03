@@ -26,7 +26,12 @@
 		
 		<nav>
 			<div class="navbar-element">
-				<a href="auth.php">Iniciar sesión</a>
+				<?php
+						session_start();
+						$user = $_SESSION['user'];
+						if( empty($user) ) echo '<a href="auth.php">Iniciar Sesión</a>';
+						else echo '<a href="perfil.php">'.$user.'</a>';	
+				?>
 			</div>
 		</nav>
 	</header>
@@ -36,10 +41,16 @@
 <?php
 
 	require 'connect.php';
-	echo "CHUPALO";
-	$pdo = connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
+	$pdo =connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
 	foreach ($pdo->query('SELECT * FROM usuario') as $row) {
-		echo $row['rol'] . ' ' . $row['usuario'] . ' ' . $row['correo'] . '<br>';
+		$rol = $row['rol'];
+		$user = $row['usuario'];
+		$password = $row['contrasena'];
+		$email = $row['correo'];
+		$birthday = $row['nacimiento'];
+		$password = password_hash($password,PASSWORD_BCRYPT);
+		$query= "INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('$rol', '$user', '$password', '$email', TO_DATE('$birthday', 'YYYY-MM-DD'))";
+		echo $query . '<br>';
 	}
 
 ?>
