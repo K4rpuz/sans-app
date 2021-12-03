@@ -41,15 +41,8 @@
 	require 'footer.php';
 	 
 	
-	foreach ($pdo->query('SELECT * FROM usuario') as $row) {
-		$rol = $row['rol'];
-		$user = $row['usuario'];
-		$password = $row['contrasena'];
-		$email = $row['correo'];
-		$birthday = $row['nacimiento'];
-		$password = password_hash($password,PASSWORD_BCRYPT);
-		$query= "INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('$rol', '$user', '$password', '$email', TO_DATE('$birthday', 'YYYY-MM-DD'))";
-		echo $query . ' -- '.$row['contrasena'].'<br>';
+	foreach ($pdo->query("SELECT id,nombre,precio,cantidad,stock,subtotal FROM view_carrito WHERE rol_usuario='".$_SESSION['rol']."'") as $row) {
+		echo $row['nombre'].' '.$row['cantidad'].'<br>';
 	}
 
 ?>

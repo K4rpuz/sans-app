@@ -3,11 +3,12 @@ DROP TABLE boleta;
 DROP TABLE producto;
 DROP TABLE usuario;
 
+
 CREATE TABLE usuario (
 	rol VARCHAR(11) NOT NULL PRIMARY KEY,
 	usuario VARCHAR(20) NOT NULL,
 	contrasena VARCHAR(60) NOT NULL,
-	correo VARCHAR(30) NOT NULL,
+	correo VARCHAR(30) NOT NULL UNIQUE,
 	nacimiento DATE NOT NULL
 );
 
@@ -23,25 +24,24 @@ CREATE TABLE producto (
 );
 
 CREATE TABLE boleta (
-	id INT GENERATED ALWAYS AS IDENTITY,
-	comprador VARCHAR(11) NOT NULL,
-	producto INT NOT NULL,
+	id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	rol_comprador VARCHAR(11) NOT NULL,
+	id_producto INT NOT NULL,
 	nombre_producto VARCHAR(30) NOT NULL,
 	fecha DATE NOT NULL,
 	cantidad INT NOT NULL,
 	precio_unidad INT NOT NULL,
 	calificacion INT,
-	comentario VARCHAR(500),
-	PRIMARY KEY (comprador, producto, id)
+	comentario VARCHAR(500)
 );
 
 CREATE TABLE carrito (
-	usuario VARCHAR(11) NOT NULL,
-	producto INT NOT NULL,
+	rol_usuario VARCHAR(11) NOT NULL,
+	id_producto INT NOT NULL,
 	cantidad INT NOT NULL,
-	PRIMARY KEY (usuario, producto),
-	CONSTRAINT fk_usuario FOREIGN KEY (usuario) REFERENCES usuario(rol) ON DELETE CASCADE,
-	CONSTRAINT fk_producto FOREIGN KEY (producto) REFERENCES producto(id) ON DELETE CASCADE
+	PRIMARY KEY (rol_usuario, id_producto),
+	CONSTRAINT fk_usuario FOREIGN KEY (rol_usuario) REFERENCES usuario(rol) ON DELETE CASCADE,
+	CONSTRAINT fk_producto FOREIGN KEY (id_producto) REFERENCES producto(id) ON DELETE CASCADE
 );
 
 
@@ -51,7 +51,7 @@ CREATE OR REPLACE FUNCTION check_new_product()
 	AS $$
 BEGIN
 	IF EXISTS (SELECT FROM producto WHERE stock > 0) THEN
-		IF NOT EXISTS (SELECT FROM boleta WHERE comprador = NEW.vendedor) THEN
+		IF NOT EXISTS (SELECT FROM boleta WHERE rol_comprador = NEW.vendedor) THEN
 			RAISE EXCEPTION 'No se puede vender productos sin haber comprado antes';
 		END IF;
 	END IF;
@@ -90,7 +90,7 @@ BEGIN
 		RAISE EXCEPTION 'No hay suficiente stock';
 	END IF;
 
-	INSERT INTO boleta (comprador, producto, nombre_producto, fecha, cantidad, precio_unidad) VALUES (rol_comprador, id_producto, (SELECT nombre FROM producto WHERE id = id_producto), CURRENT_DATE, cantidad, (SELECT precio FROM producto WHERE id = id_producto));
+	INSERT INTO boleta (rol_comprador, id_producto, nombre_producto, fecha, cantidad, precio_unidad) VALUES (rol_comprador, id_producto, (SELECT nombre FROM producto WHERE id = id_producto), CURRENT_DATE, cantidad, (SELECT precio FROM producto WHERE id = id_producto));
 END;
 $$;
 
@@ -99,7 +99,7 @@ CREATE OR REPLACE FUNCTION post_new_boleta()
 	LANGUAGE plpgsql
 	AS $$
 BEGIN
-	UPDATE producto SET stock = stock - NEW.cantidad WHERE id = NEW.producto;
+	UPDATE producto SET stock = stock - NEW.cantidad WHERE id = NEW.id_producto;
 	RETURN NEW;
 END;
 $$;
@@ -108,9 +108,9 @@ CREATE TRIGGER post_new_boleta_trigger
 	AFTER INSERT ON boleta
 	FOR EACH ROW
 	EXECUTE PROCEDURE post_new_boleta();
-	
 
-CREATE OR REPLACE PROCEDURE agregar_producto_carrito(rol_comprador VARCHAR(11), id_producto INT, cantidad_ INT)
+
+CREATE OR REPLACE PROCEDURE agregar_producto_carrito(rol_comprador VARCHAR(11), producto_id INT, cantidad_ INT)
 	LANGUAGE plpgsql
 	AS $$
 BEGIN
@@ -118,7 +118,7 @@ BEGIN
 		RAISE EXCEPTION 'La cantidad debe ser mayor a 0';
 	END IF;
 
-	IF NOT EXISTS (SELECT FROM producto WHERE id = id_producto) THEN
+	IF NOT EXISTS (SELECT FROM producto WHERE id = producto_id) THEN
 		RAISE EXCEPTION 'El producto no existe';
 	END IF;
 
@@ -126,16 +126,14 @@ BEGIN
 		RAISE EXCEPTION 'El usuario no existe';
 	END IF;
 
-	IF EXISTS (SELECT FROM carrito WHERE usuario = rol_comprador AND producto = id_producto) THEN
-		UPDATE carrito SET cantidad = cantidad_ WHERE usuario = rol_comprador AND producto = id_producto;
+	IF EXISTS (SELECT FROM carrito WHERE rol_usuario = rol_comprador AND id_producto = producto_id) THEN
+		UPDATE carrito SET cantidad = cantidad_ WHERE rol_usuario = rol_comprador AND id_producto = producto_id;
 	ELSE
-		INSERT INTO carrito (usuario, producto, cantidad) VALUES (rol_comprador, id_producto, cantidad_);
+		INSERT INTO carrito (rol_usuario, id_producto, cantidad) VALUES (rol_comprador, producto_id, cantidad_);
 	END IF;
 	
 END;
 $$;
-
-
 
 
 SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';
@@ -201,7 +199,7 @@ CALL comprar_producto('202030538-2', 4, 2);
 SELECT * FROM boleta;
 
 SELECT * FROM carrito;
-CALL agregar_producto_carrito('202030538-2', 1, 2);
+CALL agregar_producto_carrito('202030533-1', 2, 3);
 
 DELETE FROM usuario WHERE rol = '202030538-2';
 
@@ -225,3 +223,7 @@ SELECT * FROM top_mas_vendidos;
 CREATE OR REPLACE VIEW top_vendedor AS SELECT p.vendedor,(SELECT usuario FROM usuario WHERE rol=p.vendedor) ,SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.producto GROUP BY p.vendedor ORDER BY cantidad_vendida DESC LIMIT 5;
 
 SELECT * FROM top_vendedor;
+
+CREATE OR REPLACE VIEW view_carrito AS SELECT rol_usuario,id, nombre, precio, stock, cantidad, (cantidad*precio) AS subtotal FROM producto INNER JOIN carrito ON id=id_producto;
+
+SELECT * FROM view_carrito;
