@@ -206,5 +206,11 @@ BEGIN
 END;
 $$;
 
+-- top 5 productos mas vendidos
+CREATE OR REPLACE VIEW top_mas_vendidos AS SELECT p.id, p.nombre, p.precio, p.vendedor, SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.producto GROUP BY p.id ORDER BY cantidad_vendida DESC LIMIT 5;
 
-SELECT p.id, p.nombre, b.cantidad AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.producto;
+SELECT * FROM top_mas_vendidos;
+
+CREATE OR REPLACE VIEW top_vendedor AS SELECT p.vendedor,(SELECT usuario FROM usuario WHERE rol=p.vendedor) ,SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.producto GROUP BY p.vendedor ORDER BY cantidad_vendida DESC LIMIT 5;
+
+SELECT * FROM top_vendedor;
