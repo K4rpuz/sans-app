@@ -67,18 +67,36 @@
 					</div>	
 				</div>
 		</div>
-			<div class="perfil-layout">
-				<h3>Opciones</h3>
-				<div class="perfil-opciones">
-					<form action="">
-						<button type="submit" class="boton-rojo boton">Historial de compra</button>
-					</form>
-					<form action="">
-						<button type="submit" class="boton-amarillo boton">Historial de venta</button>
-					</form>
-					<button class="boton_cambio_password boton-azul boton">Cambiar contraseña</button>
-				</div>	
+			
+		<div class="perfil-layout">
+			<h3>Movimiento</h3>			
+			<div class="perfil-info perfil-info--movimiento">
+				<div class="perfil-compras">
+							<p><span class="bold">Compras</span></p>
+							<p> <?php echo $user ?> </p>
+						<form action="">
+							<button type="submit" class="boton-rojo boton">Historial de compra</button>
+						</form>
+				</div>
+				<div class="perfil-ventas">
+							<p><span class="bold">Ventas</span></p>
+							<p> <?php
+								echo $correo;	
+								?>
+							</p>
+						<form action="">
+							<button type="submit" class="boton-amarillo boton">Historial de venta</button>
+						</form>
+				</div>		
 			</div>
+	</div>
+		<div class="perfil-layout">
+			<h3>Opciones</h3>
+			<div class="perfil-opciones">			
+				<button class="boton-cambio-password boton-azul boton">Cambiar contraseña</button>
+				<button class="boton-eliminar-cuenta boton-rojo boton">ELIMINAR CUENTA</button>
+			</div>	
+		</div>
 		</section>	
 		<script type="module" src="../JS/busqueda.js"></script>
 </body>
