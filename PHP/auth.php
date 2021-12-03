@@ -1,4 +1,7 @@
-
+<?php
+	session_start();
+	if( !empty($_SESSION['user']) ) session_destroy();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

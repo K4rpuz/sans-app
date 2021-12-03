@@ -33,26 +33,27 @@
 							echo '<a href="perfil.php">'.$user.'</a>';	
 							echo '<a href="auth.php">Logout</a>';	
 						} 
-?>
+				?>
 			</div>
 		</nav>
 	</header>
+
+	<section class="perfil">
+		<div class="perfil-nombre">
+			<p><?php echo $_SESSION['user'] ?> </p>
+		</div>
+		<?php
+			$query = "SELECT * FROM usuario";
+			$pdo =connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
+			$pdo->query($query);
+		?>
+		<div class="perfil-correo">
+			<p> <?php
+				
+			?> </p>
+		</div>
+	</section>
+	
 	<script type="module" src="../JS/busqueda.js"></script>
 </body>
 </html>
-<?php
-
-	require 'connect.php';
-	$pdo =connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
-	foreach ($pdo->query('SELECT * FROM usuario') as $row) {
-		$rol = $row['rol'];
-		$user = $row['usuario'];
-		$password = $row['contrasena'];
-		$email = $row['correo'];
-		$birthday = $row['nacimiento'];
-		$password = password_hash($password,PASSWORD_BCRYPT);
-		$query= "INSERT INTO usuario(rol, usuario, contrasena, correo, nacimiento) VALUES ('$rol', '$user', '$password', '$email', TO_DATE('$birthday', 'YYYY-MM-DD'))";
-		echo $query . '<br>';
-	}
-
-?>
