@@ -1,3 +1,6 @@
+DROP VIEW IF EXISTS usuario_info;
+DROP VIEW IF EXISTS calificaciones;
+DROP VIEW IF EXISTS producto_info;
 DROP VIEW IF EXISTS view_carrito;
 DROP VIEW IF EXISTS top_vendedor;
 DROP VIEW IF EXISTS top_mas_vendidos;
@@ -124,6 +127,10 @@ BEGIN
 		RAISE EXCEPTION 'La cantidad debe ser mayor a 0';
 	END IF;
 
+	IF NOT EXISTS (SELECT FROM producto WHERE id = producto_id AND stock >= cantidad_) THEN
+		RAISE EXCEPTION 'No hay suficiente stock';
+	END IF;
+
 	IF NOT EXISTS (SELECT FROM producto WHERE id = producto_id) THEN
 		RAISE EXCEPTION 'El producto no existe';
 	END IF;
@@ -185,7 +192,19 @@ CALL comprar_producto('202030513-7', 8, 2);
 CREATE OR REPLACE VIEW top_mas_vendidos AS SELECT p.id, p.nombre, p.precio, p.vendedor, SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.id_producto GROUP BY p.id ORDER BY cantidad_vendida DESC LIMIT 5;
 
 -- top 5 vendedores con mas ventas
-CREATE OR REPLACE VIEW top_vendedor AS SELECT p.vendedor,(SELECT usuario FROM usuario WHERE rol=p.vendedor) ,SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.id_producto GROUP BY p.vendedor ORDER BY cantidad_vendida DESC LIMIT 5;
+CREATE OR REPLACE VIEW top_vendedor AS SELECT u.rol, u.usuario ,SUM(b.cantidad) AS cantidad_vendida FROM usuario as u INNER JOIN boleta as b ON u.rol = b.rol_vendedor GROUP BY u.rol ORDER BY cantidad_vendida DESC LIMIT 5;
 
 -- vista para carrito
 CREATE OR REPLACE VIEW view_carrito AS SELECT rol_usuario,id, nombre, precio, stock, cantidad, (cantidad*precio) AS subtotal FROM producto INNER JOIN carrito ON id=id_producto;
+
+-- vista para datos de producto
+CREATE OR REPLACE VIEW producto_info AS SELECT p.id, p.nombre, p.precio,p.stock,p.descripcion,p.categoria, p.vendedor,(SELECT usuario FROM usuario WHERE rol=p.vendedor) AS nombre_vendedor, SUM(b.cantidad) AS cantidad_vendida, AVG(b.calificacion) AS calificacion_promedio FROM producto as p FULL JOIN boleta as b ON p.id = b.id_producto GROUP BY p.id;
+
+-- vista calificaciones
+CREATE OR REPLACE VIEW calificaciones AS SELECT id,nombre_producto, rol_comprador,(SELECT usuario FROM usuario WHERE rol=rol_comprador) AS nombre_comprador, calificacion, comentario,fecha FROM boleta WHERE calificacion IS NOT NULL;
+
+-- vista para datos de usuario
+CREATE OR REPLACE VIEW usuario_info AS SELECT u.rol, u.usuario,u.correo,u.nacimiento, SUM(b.cantidad) AS cantidad_vendida, AVG(b.calificacion) AS calificacion_promedio, SUM(b.cantidad*b.precio_unidad) AS ganancias_totales FROM usuario as u FULL JOIN boleta as b ON u.rol = b.rol_vendedor GROUP BY u.rol;
+
+-- vista top 5 calificaciones
+CREATE OR REPLACE VIEW top_calificaciones AS SELECT p.id, p.nombre, p.precio, p.vendedor, ROUND(AVG(b.calificacion),2) AS calificacion_promedio FROM producto as p INNER JOIN boleta as b ON p.id = b.id_producto GROUP BY p.id HAVING AVG(b.calificacion) IS NOT NULL;

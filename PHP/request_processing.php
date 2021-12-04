@@ -39,10 +39,5 @@ function loadForm($parameters){
 	return $form;
 }
 
-function getOrGoLogin($parameter){
-	if(session_status() == PHP_SESSION_NONE) session_start();
-	$p = $_SESSION[$parameter];
-	if(empty($p)) header('./auth.php');
-	return $p;
-}
+
 ?>

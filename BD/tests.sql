@@ -199,7 +199,7 @@ CALL comprar_producto('202030538-2', 4, 2);
 SELECT * FROM boleta;
 
 SELECT * FROM carrito;
-CALL agregar_producto_carrito('202030533-1', 2, 3);
+CALL agregar_producto_carrito('202030533-1', 2, 2);
 
 DELETE FROM usuario WHERE rol = '202030538-2';
 
@@ -216,14 +216,31 @@ END;
 $$;
 
 -- top 5 productos mas vendidos
-CREATE OR REPLACE VIEW top_mas_vendidos AS SELECT p.id, p.nombre, p.precio, p.vendedor, SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.producto GROUP BY p.id ORDER BY cantidad_vendida DESC LIMIT 5;
+CREATE OR REPLACE VIEW top_mas_vendidos AS SELECT p.id, p.nombre, p.precio, p.vendedor, SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.id_producto GROUP BY p.id ORDER BY cantidad_vendida DESC LIMIT 5;
+
+-- top 5 vendedores con mas ventas
+--CREATE OR REPLACE VIEW top_vendedor AS SELECT p.vendedor,(SELECT usuario FROM usuario WHERE rol=p.vendedor) ,SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.id_producto GROUP BY p.vendedor ORDER BY cantidad_vendida DESC LIMIT 5;
+SELECT u.rol, u.usuario ,SUM(b.cantidad) AS cantidad_vendida FROM usuario as u INNER JOIN boleta as b ON u.rol = b.rol_vendedor GROUP BY u.rol ORDER BY cantidad_vendida DESC LIMIT 5;
+
+-- vista para carrito
+CREATE OR REPLACE VIEW view_carrito AS SELECT rol_usuario,id, nombre, precio, stock, cantidad, (cantidad*precio) AS subtotal FROM producto INNER JOIN carrito ON id=id_producto;
 
 SELECT * FROM top_mas_vendidos;
 
-CREATE OR REPLACE VIEW top_vendedor AS SELECT p.vendedor,(SELECT usuario FROM usuario WHERE rol=p.vendedor) ,SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.producto GROUP BY p.vendedor ORDER BY cantidad_vendida DESC LIMIT 5;
-
 SELECT * FROM top_vendedor;
 
-CREATE OR REPLACE VIEW view_carrito AS SELECT rol_usuario,id, nombre, precio, stock, cantidad, (cantidad*precio) AS subtotal FROM producto INNER JOIN carrito ON id=id_producto;
-
 SELECT * FROM view_carrito;
+
+SELECT count(*),count(calificacion) FROM boleta;
+
+SELECT p.id, p.nombre, p.precio, p.vendedor,(SELECT usuario FROM usuario WHERE rol=p.vendedor) AS nombre_vendedor, SUM(b.cantidad) AS cantidad_vendida, AVG(b.calificacion) AS calificacion_promedio FROM producto as p FULL JOIN boleta as b ON p.id = b.id_producto GROUP BY p.id;
+
+SELECT id,nombre_producto, rol_comprador,(SELECT usuario FROM usuario WHERE rol=rol_comprador) AS nombre_comprador, calificacion, comentario,fecha FROM boleta WHERE calificacion IS NOT NULL;
+
+SELECT u.rol, u.usuario,u.correo,u.nacimiento, SUM(b.cantidad) AS cantidad_vendida, AVG(b.calificacion) AS calificacion_promedio, SUM(b.cantidad*b.precio_unidad) AS ganancias_totales FROM usuario as u FULL JOIN boleta as b ON u.rol = b.rol_vendedor GROUP BY u.rol;
+
+SELECT p.id, p.nombre, p.precio, p.vendedor, ROUND(AVG(b.calificacion),2) AS calificacion_promedio FROM producto as p INNER JOIN boleta as b ON p.id = b.id_producto GROUP BY p.id HAVING AVG(b.calificacion) IS NOT NULL;
+
+SELECT * FROM producto_info WHERE calificacion_promedio IS NOT NULL;
+
+SELECT p.id, p.nombre, p.precio, p.vendedor, SUM(b.cantidad) AS cantidad_vendida FROM producto as p INNER JOIN boleta as b ON p.id = b.id_producto GROUP BY p.id ORDER BY cantidad_vendida DESC LIMIT 5;

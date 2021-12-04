@@ -11,4 +11,11 @@ function connect(string $host, string $db, string $dbPort, string $user, string 
 		die("Connection failed: " . $e->getMessage());
 	}
 }
-//return connect($dbHost, $db, $dbPort, $dbUser, $dbPass);
+
+
+function getOrGoLogin($parameter){
+	if(session_status() == PHP_SESSION_NONE) session_start();
+	$p = $_SESSION[$parameter];
+	if(empty($p)) header('location: auth.php',true);
+	return $p;
+}

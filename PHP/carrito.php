@@ -30,7 +30,7 @@
 				break;
 		}
 
-		header('Location: carrito.php');
+		header('Location: carrito.php',true);
 	}
 	
 ?>
@@ -52,7 +52,7 @@
 					<article class="producto_carrito">
 						<div class="producto_info">	
 							<div class="producto_decription">
-								<h2><a href="sans-app/PHP/producto/<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></a></h2>
+								<h2><a href="productos.php?sku=<?php echo $row['id'] ?>"><?php echo $row['nombre'] ?></a></h2>
 							</div>
 							<div class="ui_cantidad">
 								<form action="carrito.php" method="post" id="form-cantidad-producto_<?php echo $row['id'] ?>">
@@ -61,7 +61,7 @@
 									<button type="submit" name="btn" <?php echo ($row['cantidad']<=1)?'disabled':'value="'.($row['cantidad']-1).'"'?> class="btn_producto_cantidad">-</button>
 									<input type="text" name="producto_cantidad" class="input_cantidad_producto" id="<?php echo $row['stock'].','.$row['cantidad'].','.$row['id'] ?>" value="<?php echo $row['cantidad'] ?>" autocomplete="off">
 									<span class="stock_producto"><?php echo $row['stock'] ?> disponibles</span>
-									<button type="submit" name="btn" <?php echo ($row['stock']==$row['cantidad'])?'disabled':'value="'.($row['cantidad']+1).'"' ?> class="btn_producto_cantidad">+</button>
+									<button type="submit" name="btn" <?php echo ($row['stock']<=$row['cantidad'])?'disabled':'value="'.($row['cantidad']+1).'"' ?> class="btn_producto_cantidad">+</button>
 								</form>
 							</div>
 							<div class="producto_precio">

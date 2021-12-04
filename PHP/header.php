@@ -18,9 +18,11 @@
 			<div class="navbar-element">
 				<?php
 						session_start();
-						$user = $_SESSION['user'];
+
+						$user = isset($_SESSION['user'])?$_SESSION['user']:null;
 						if( empty($user) ) echo '<a href="auth.php">Iniciar Sesión</a>';
 						else{
+							echo '<a href="carrito.php">Carrito</a>';	
 							echo '<a href="perfil.php" class="nombre-usuario">'.$user.'</a>';	
 							echo '<a href="auth.php">Logout</a>';	
 						} 

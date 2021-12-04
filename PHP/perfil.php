@@ -1,8 +1,9 @@
 <?php
-	session_start();
+	/*session_start();
 	$user = $_SESSION['user'];
-	if( empty($user) ) header("location: ../PHP/auth.php",true);
+	if( empty($user) ) header("location: ../PHP/auth.php",true);*/
 	require_once 'header.php';
+	$user = getOrGoLogin('user')
 ?>
 	
 		
@@ -50,10 +51,14 @@
 							<p><span class="bold">Compras</span></p>
 							<p> <?php 
 							$cantidadCompras = 0;
-						foreach($pdo->query("SELECT count(*) FROM boleta WHERE rol_comprador='$rol'") as $fila){
+						foreach($pdo->query("SELECT count(*), count(calificacion) AS calificadas FROM boleta WHERE rol_comprador='$rol'") as $fila){
 							$cantidadCompras = $fila['count'];
+							$comprasSinCalificar = $cantidadCompras-$fila['calificadas'];
 						}
 							echo $cantidadCompras;
+							if($comprasSinCalificar > 0)
+								echo "<span class='bold'> sin calificar: $comprasSinCalificar</span>";
+
 					?> </p>
 						<form action="historial.php" method="GET">
 							<input type="hidden" name="request" value="compras">
