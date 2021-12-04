@@ -35,6 +35,8 @@ body{
 h1{
   font-size: 3rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  text-decoration: underline;
 }
 
 h2{
@@ -94,6 +96,7 @@ form p{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+
 .boton{
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
@@ -104,7 +107,10 @@ form p{
   border-radius: 10px;
   cursor: pointer;
   border: .5px solid black;
+  text-align: center;
+  line-height: 7rem;
 }
+
 
 .boton--img{
   background: transparent;
@@ -344,13 +350,13 @@ nav a:hover{
 .perfil-info p{
   font-size: 1.5rem;
 }
-.perfil-info img{
+.perfil-info .boton-perfil{
   width: 5rem;
   box-shadow: 1px 1px 3px black;
   border-radius: 10px;
   padding: .3rem;
 }
-.perfil-info img:hover{
+.perfil-info .boton-perfil:hover{
   box-shadow: 1px 1px 1px black inset;
 }
 
@@ -372,3 +378,149 @@ nav a:hover{
   margin-bottom: 1rem;
 }
 
+/* Historial */
+
+.historial{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.boleta{
+  background-color: white;
+  box-shadow: .1px .1px 3px black;
+  border-bottom-right-radius: 30px;
+  padding: 2rem;
+  width: 55rem;
+  margin: 3rem;
+}
+
+.boleta-cabecera{
+  display: flex;
+  align-items: center;
+}
+
+.boleta-cabecera h3{
+  font-size: 3rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.boleta-cabecera h3:hover{
+  color: var(--blue-green);
+}
+
+.boleta-pie{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.boleta-calificacion{
+  margin-left: 1rem;
+}
+.img-calificacion{
+  width: 4rem;
+}
+
+.boleta-detalle:last-child{
+  border-bottom: none;
+}
+
+.detalle-container{
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-items: center;
+  text-align: left;
+  border-bottom: 3px solid var(--gris-claro);
+}
+
+.detalle-etiqueta{
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2rem;
+}
+
+.detalle-info{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.7rem;
+}
+
+.detalle-usuario{
+  font-weight: normal;
+}
+
+.detalle-usuario:hover{
+  color: var(--blue-green);
+}
+
+.boton--calificar{
+  width: 15rem;
+  line-height: 5rem;
+  height: 6rem;
+}
+
+.boton--calificar:visited{
+  color: white;
+}
+
+.boleta-fecha{
+  color: gray;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+.boleta-comentario{
+  color: gray;
+  font-size: 3rem;
+  font-family: 'Corinthia', cursive;
+}
+
+.perfil-usuario{
+  margin: 5rem auto;
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid black;
+  width: 50%;
+}
+
+.perfil-usuario h3{
+  font-size: 3rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+
+.usuario-info-icon{
+  width: 5rem;
+}
+
+.usuario-info-personal{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 50% 50%;
+  padding-left: 10rem;
+  padding-right: 5rem;
+  padding-bottom: 5rem;
+}
+
+.usuario-info-personal-dato{
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.usuario-info-personal-dato p{
+  margin-left: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.7rem;
+}
+
+.usuario-info-personal-dato-etiqueta{
+  font-size: 2rem !important;
+  font-weight: bold;
+  margin-left: 1.2rem !important;
+  font-family: Verdana, Geneva, Tahoma, sans-serif !important;
+}

@@ -6,17 +6,53 @@
 	if(isset($_GET['request'])){
 		switch ($_GET['request']) {
 			case 'ventas':
-				echo '<h1>Historial de ventas</h1><hr><div class="historial_venta">';
+				echo '<h1>Historial de ventas</h1><hr><div class="historial historial--venta">';
 				$results = $pdo->query("SELECT * FROM boleta WHERE rol_vendedor= '$rol'");
 				$result = $results->fetch(PDO::FETCH_ASSOC);
-				if(!$result) echo "No haz vendido ningun producto";
+				if(!$result) echo "No has vendido ningun producto";
 				
 				else{
 					while($result){
 						echo '<div class="boleta">';
-						foreach($result as $key => $value){
-							echo $key.": ".$value."<br>";
+						$nombre_producto = $result['nombre_producto'];
+						$precio_unitario = $result['precio_unidad'];
+						$cantidad_comprada = $result['cantidad'];
+						$calificacion = $result['calificacion'];
+						$rol_comprador = $result['rol_comprador'];
+						$id_producto = $result['id_producto'];
+						$comentario = $result['comentario'];
+						$total = $precio_unitario*$cantidad_comprada;
+						echo '<div class="boleta-cabecera">';
+						echo '<a class="boleta-link" href="productos.php?sku='.$id_producto.'"><h3>'.$nombre_producto.'</h3></a>';
+						echo '<div class="boleta-calificacion">';
+						for( $i = 0; $i < $calificacion; ++$i ){
+							echo '<img src="../IMG/estrella.png"class="img-calificacion"></img>';
 						}
+						echo '</div></div>';
+						echo '<div class="boleta-detalle">';
+						echo '<div class="detalle-container">';
+							echo '<p class="detalle-etiqueta">Unidades vendidas</p>';
+							echo '<p class="detalle-info">'.$cantidad_comprada.'</p>';
+						echo '</div>';
+						echo '<div class="detalle-container">';
+							echo '<p class="detalle-etiqueta">Precio unidad</p>';
+							echo '<p class="detalle-info">'.$precio_unitario.' $</p>';
+						echo '</div>';
+						echo '<div class="detalle-container">';
+							echo '<p class="detalle-etiqueta">Rol del comprador</p>';
+							echo '<a href="usuarios.php?rol='.$rol_comprador.'" class="detalle-info detalle-usuario">'.$rol_comprador.'</a>';
+						echo '</div>';
+						echo '<div class="detalle-container">';
+							echo '<p class="detalle-etiqueta">Total recibido</p>';
+							echo '<p class="detalle-info">'.$total.' $</p>';
+						echo '</div></div>';
+						/*foreach($result as $key => $value){
+							echo $key.": ".$value."<br>";
+						}*/
+						echo '<div class="boleta-pie">';
+							echo '<p class="boleta-comentario">'.$comentario.'</p>';
+							echo '<p class="boleta-fecha">'.( date( 'd/m/Y',strtotime( $result['fecha'] ) )).'</p>';
+						echo '</div>';
 						echo '</div><br>';
 						$result = $results->fetch(PDO::FETCH_ASSOC);
 					}
@@ -24,22 +60,57 @@
 				}
 				break;
 			case 'compras':
-				echo '<h1>Historial de compras</h1><hr><div class="historial_compra">';
+				echo '<h1>Historial de compras</h1><div class="historial historial--compra">';
 				$results = $pdo->query("SELECT * FROM boleta WHERE rol_comprador= '$rol'");
 				$result = $results->fetch(PDO::FETCH_ASSOC);
-				if(!$result) echo "No haz comprado ningun producto";
+				if(!$result) echo "No has comprado ningun producto";
 				
 				else{
 					while($result){
 						echo '<div class="boleta">';
-						foreach($result as $key => $value){
+						$nombre_producto = $result['nombre_producto'];
+						$precio_unitario = $result['precio_unidad'];
+						$cantidad_comprada = $result['cantidad'];
+						$calificacion = $result['calificacion'];
+						$rol_vendedor = $result['rol_vendedor'];
+						$id_producto = $result['id_producto'];
+						$total = $precio_unitario*$cantidad_comprada;
+						echo '<div class="boleta-cabecera">';
+						echo '<a class="boleta-link" href="productos.php?sku='.$id_producto.'"><h3>'.$nombre_producto.'</h3></a>';
+						echo '<div class="boleta-calificacion">';
+						for( $i = 0; $i < $calificacion; ++$i ){
+							echo '<img src="../IMG/estrella.png"class="img-calificacion"></img>';
+						}
+						echo '</div></div>';
+						echo '<div class="boleta-detalle">';
+						echo '<div class="detalle-container">';
+							echo '<p class="detalle-etiqueta">Unidades compradas</p>';
+							echo '<p class="detalle-info">'.$cantidad_comprada.'</p>';
+						echo '</div>';
+						echo '<div class="detalle-container">';
+							echo '<p class="detalle-etiqueta">Precio unidad</p>';
+							echo '<p class="detalle-info">'.$precio_unitario.' $</p>';
+						echo '</div>';
+						echo '<div class="detalle-container">';
+							echo '<p class="detalle-etiqueta">Rol del Vendedor</p>';
+							echo '<a href="usuarios.php?rol='.$rol_vendedor.'" class="detalle-info detalle-usuario">'.$rol_vendedor.'</a>';
+						echo '</div>';
+						echo '<div class="detalle-container">';
+							echo '<p class="detalle-etiqueta">Total pagado</p>';
+							echo '<p class="detalle-info">'.$total.' $</p>';
+						echo '</div></div>';
+						/*foreach($result as $key => $value){
 							echo $key.": ".$value."<br>";
-						}
-						if($result['calificacion']){
-							echo '<a href="historial.php?request=calificar&id='.$result['id'].'">Editar calificacion</a>';
-						}else{
-							echo '<a class="bold" href="historial.php?request=calificar&id='.$result['id'].'">Calificar</a>';
-						}
+						}*/
+						echo '<div class="boleta-pie">';
+							
+							if($result['calificacion']){
+								echo '<a href="historial.php?request=calificar&id='.$result['id'].'">Editar calificacion</a>';
+							}else{
+								echo '<a class="boton-amarillo boton boton--calificar" href="historial.php?request=calificar&id='.$result['id'].'">Calificar</a>';
+							}
+							echo '<p class="boleta-fecha">'.( date( 'd/m/Y',strtotime( $result['fecha'] ) )).'</p>';
+						echo '</div>';
 						echo '</div><br>';
 						$result = $results->fetch(PDO::FETCH_ASSOC);
 					}
