@@ -48,18 +48,30 @@
 			<div class="perfil-info perfil-info--movimiento">
 				<div class="perfil-compras">
 							<p><span class="bold">Compras</span></p>
-							<p> <?php echo $user ?> </p>
-						<form action="historial.php">
+							<p> <?php 
+							$cantidadCompras = 0;
+						foreach($pdo->query("SELECT count(*) FROM boleta WHERE rol_comprador='$rol'") as $fila){
+							$cantidadCompras = $fila['count'];
+						}
+							echo $cantidadCompras;
+					?> </p>
+						<form action="historial.php" method="GET">
+							<input type="hidden" name="request" value="compras">
 							<button type="submit" class="boton-rojo boton boton-historial-compra">Historial de compra</button>
 						</form>
 				</div>
 				<div class="perfil-ventas">
 							<p><span class="bold">Ventas</span></p>
 							<p> <?php
-								echo $correo;	
+							$cantidadVentas = 0;
+						foreach($pdo->query("SELECT count(*) FROM boleta WHERE rol_vendedor='$rol'") as $fila){
+							$cantidadVentas = $fila['count'];
+						}
+							echo $cantidadVentas;
 								?>
 							</p>
-						<form action="historial.php">
+						<form action="historial.php" method="GET">
+							<input type="hidden" name="request" value="ventas">
 							<button type="submit" class="boton-amarillo boton boton-historial-venta">Historial de venta</button>
 						</form>
 				</div>		

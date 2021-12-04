@@ -3,10 +3,10 @@ import {loadForm} from "./forms.js";
 import { path } from "./config.js";
 
 document.addEventListener("DOMContentLoaded", ()=>{
-	const [ botonEditarNombre, botonEditarCorreo, botonHistorialCompra, botonHistorialVenta, botonCambioPass,
+	const [ botonEditarNombre, botonEditarCorreo, botonCambioPass,
 		botonEliminarCuenta, formCambioNombre, formCambioCorreo,
 		pNombre, pCorreo,contenedorOpciones, formCambioPass,pErrorCambioPass] = loadElements(
-		[ 'boton-editar-nombre','boton-editar-correo','boton-historial-compra','boton-historial-venta','boton-cambio-password','boton-eliminar-cuenta','form-cambio-nombre','form-cambio-correo','p-nombre','p-correo','perfil-opciones', 'form-cambio-password','error-cambio-clave' ]
+		[ 'boton-editar-nombre','boton-editar-correo','boton-cambio-password','boton-eliminar-cuenta','form-cambio-nombre','form-cambio-correo','p-nombre','p-correo','perfil-opciones', 'form-cambio-password','error-cambio-clave' ]
 	);	
 
 	const [ dataNombre, postNombre ] = loadForm('form-cambio-nombre',()=>{});
