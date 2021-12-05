@@ -63,15 +63,15 @@
 							<p><span class="bold">Compras</span></p>
 							<p> <?php 
 							$cantidadCompras = 0;
-						foreach($pdo->query("SELECT count(*), count(calificacion) AS calificadas FROM boleta WHERE rol_comprador='$rol'") as $fila){
+							echo $cantidadCompras;
+						/*foreach($pdo->query("SELECT count(*), count(calificacion) AS calificadas FROM boleta WHERE rol_comprador='$rol'") as $fila){
 							$cantidadCompras = $fila['count'];
 							$comprasSinCalificar = $cantidadCompras-$fila['calificadas'];
 						}
-							echo $cantidadCompras;
 							if($comprasSinCalificar > 0)
 								echo "<span class='bold'> sin calificar: $comprasSinCalificar</span>";
 
-					?> </p>
+						 */?></p>
 						<form action="historial.php" method="GET">
 							<input type="hidden" name="request" value="compras">
 							<button type="submit" class="boton-rojo boton boton-historial-compra">Historial de compra</button>

@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 	
 	botonEditarNombre.addEventListener('click', async ()=> {
-		if( botonEditarNombre.innerHTML === '<img src="../IMG/editar.png" alt="">' ){
+		if( botonEditarNombre.innerHTML === '<img src="../IMG/editar.png" class="boton-perfil" alt="">'){
 			showElement(formCambioNombre);
 			hideElement(pNombre);
-			botonEditarNombre.innerHTML = '<img src="../IMG/confirmacion.png" alt="">';
+			botonEditarNombre.innerHTML = '<img class="boton-perfil" src="../IMG/confirmacion.png" alt="">';
 		}else{
 			hideElement(formCambioNombre);
 			showElement(pNombre);
-			botonEditarNombre.innerHTML = '<img src="../IMG/editar.png" alt="">';
+			botonEditarNombre.innerHTML = '<img class="boton-perfil" src="../IMG/editar.png" alt="">';
 			const resp = await postNombre(path.perfil);
 			if( resp['ANSWER'] === 'OK' ) {
 				const name = dataNombre.valores['user'];
@@ -35,14 +35,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
 	});
 	const [ dataCorreo, postCorreo ] = loadForm('form-cambio-correo',()=>{});
 	botonEditarCorreo.addEventListener('click', async () => {
-		if( botonEditarCorreo.innerHTML === '<img src="../IMG/editar.png" alt="">' ){
+		if( botonEditarCorreo.innerHTML === '<img src="../IMG/editar.png" class="boton-perfil" alt="">' ){
 			showElement(formCambioCorreo);
 			hideElement(pCorreo);
-			botonEditarCorreo.innerHTML = '<img src="../IMG/confirmacion.png" alt="">';
+			botonEditarCorreo.innerHTML = '<img class="boton-perfil" src="../IMG/confirmacion.png" alt="">';
 		}else{
 			hideElement(formCambioCorreo);
 			showElement(pCorreo);
-			botonEditarCorreo.innerHTML = '<img src="../IMG/editar.png" alt="">';
+			botonEditarCorreo.innerHTML = '<img src="../IMG/editar.png" class="boton-perfil" alt="">';
 			const resp = await postCorreo(path.perfil);
 			if( resp['ANSWER'] === 'OK' ) pCorreo.innerHTML= dataCorreo.valores['correo'];
 			else console.log(resp['ANSWER']);
@@ -80,14 +80,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 	const [ dataNacimiento, postNacimiento ] = loadForm('form-cambio-nacimiento',()=>{});
 	botonEditarNacimiento.addEventListener('click', async () => {
-		if( botonEditarNacimiento.innerHTML === '<img src="../IMG/editar.png" alt="">' ){
+		if( botonEditarNacimiento.innerHTML === '<img src="../IMG/editar.png" class="boton-perfil" alt="">' ){
 			showElement(formCambioNacimiento);
 			hideElement(pNacimiento);
-			botonEditarNacimiento.innerHTML = '<img src="../IMG/confirmacion.png" alt="">';
+			botonEditarNacimiento.innerHTML = '<img class="boton-perfil" src="../IMG/confirmacion.png" alt="">';
 		}else{
 			hideElement(formCambioNacimiento);
 			showElement(pNacimiento);
-			botonEditarNacimiento.innerHTML = '<img src="../IMG/editar.png" alt="">';
+			botonEditarNacimiento.innerHTML = '<img src="../IMG/editar.png" class="boton-perfil" alt="">';
 			const resp = await postNacimiento(path.perfil);
 			if( resp['ANSWER'] === 'OK' ) pNacimiento.innerHTML= dataNacimiento.valores['nacimiento'];
 			else console.log(resp['ANSWER']);
