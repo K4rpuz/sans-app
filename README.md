@@ -19,15 +19,15 @@ create database sansapp;
 
 ## To-do
 - Sistema
-	- navegacion sin recargar o retroceder
-	- mostrar usuario activo siempre
+	~~- navegacion sin recargar o retroceder~~
+	~~- mostrar usuario activo siempre~~
 - BD
 	- ~~tablas~~
 	- ~~2 triggers~~
 	- ~~2 vistas~~
 - Pagina Principal
 	- barra de busqueda (categorias, productos, usuarios)
-	- top 5 productos mejor promedio calificaciones
+	~~- top 5 productos mejor promedio calificaciones ~~
 	- ~~top 5 productos mas vendidos~~
 	- ~~top 5 usuarios con mas ventas~~
 - Barra de busqueda
@@ -39,16 +39,16 @@ create database sansapp;
 	-~~ mostrar cantidad de productos vendidos, comprados, usuario y correo~~
 	-~~ historial de compras y ventas~~
 - Carrito
-	- edicion de productos en carrito
+	~~- edicion de productos en carrito
 	- mostrar info de los productos; cantidad, nombre, precio...
-	- Boton de compra
+	- Boton de compra~~
 - Productos
 	- CRUD para productos en venta
-	- CRUD para comentarios 
-	- debe mostrar toda la info relacionada, total vendido y unidades disponibles
-	- mostrar cantidad de comentarios, promedio de calificacion y nombre del vendedor con enlace al perfil
+	~~- CRUD para comentarios~~ 
+	~~- debe mostrar toda la info relacionada, total vendido y unidades disponibles~~
+	~~- mostrar cantidad de comentarios, promedio de calificacion y nombre del vendedor con enlace al perfil~~
 - Historial
-	- mostrar producto, fecha, precio, cantidad, nombre comprador o vendedor segun quien vea| **consultar caso de borrado**
+	~~- mostrar producto, fecha, precio, cantidad, nombre comprador o vendedor segun quien vea| **consultar caso de borrado**~~
 
-- sistema de registro
-- solo usuario registrado y logueado puede comprar
+~~- sistema de registro~~
+~~- solo usuario registrado y logueado puede comprar~~
