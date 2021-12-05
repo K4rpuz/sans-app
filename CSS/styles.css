@@ -720,3 +720,22 @@ nav a:hover{
   width: 50%;
 }
 
+.notificacion{
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background-color: var(--lighten-maximum-red);
+  border: 1px solid black;
+  width: 4rem;
+  height: 3rem;
+  position: relative;
+  top: -10rem;
+  right: -12rem;
+}
+
+.notificacion p{
+  text-align: center;
+  color: white;
+  width: 100% !important;
+}
