@@ -114,7 +114,7 @@
 		</section>
 				<?php
 		echo '<hr><div class="comments">';
-		$results = $pdo->query("SELECT * FROM calificaciones WHERE id = '".$_GET['sku']."'");
+		$results = $pdo->query("SELECT * FROM calificaciones WHERE id_producto = '".$_GET['sku']."'");
 		$result = $results->fetch(PDO::FETCH_ASSOC);
 		if(!$result) echo "Este producto aun no tiene calificaciones";
 		else{

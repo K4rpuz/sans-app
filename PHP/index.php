@@ -48,7 +48,6 @@
 		?>
 	</div>
 
-	<script type="module" src="../JS/busqueda.js"></script>
 
 <?php
 	require 'footer.php';

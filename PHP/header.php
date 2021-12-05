@@ -7,8 +7,8 @@
 				<img src="../IMG/logo.jpeg" alt="logo">
 			</a>
 			<section class="barra-busqueda">	
-				<form>
-					<input type="text" name="search" id="" placeholder="Buscar...">
+				<form action="search.php" method="GET">
+					<input type="text" name="name" id="" placeholder="Buscar..." autocomplete="off">
 				</form>
 				<div class="barra-busqueda__resultados"></div>
 			</section>
@@ -22,7 +22,8 @@
 						$user = isset($_SESSION['user'])?$_SESSION['user']:null;
 						if( empty($user) ) echo '<a href="auth.php">Iniciar Sesión</a>';
 						else{
-							echo '<a href="carrito.php">Carrito</a>';	
+							$result = $pdo->query("SELECT count(*) FROM carrito WHERE rol_usuario = '".$_SESSION['rol']."'")->fetch(PDO::FETCH_ASSOC);
+							echo '<a href="carrito.php">Carrito ('.$result['count'].')</a>';	
 							echo '<a href="perfil.php" class="nombre-usuario">'.$user.'</a>';	
 							echo '<a href="auth.php">Logout</a>';	
 						} 
