@@ -203,7 +203,7 @@ CREATE OR REPLACE VIEW view_carrito AS SELECT rol_usuario,id, nombre, precio, st
 CREATE OR REPLACE VIEW producto_info AS SELECT p.id, p.nombre, p.precio,p.stock,p.descripcion,p.categoria, p.vendedor,(SELECT usuario FROM usuario WHERE rol=p.vendedor) AS nombre_vendedor, SUM(b.cantidad) AS cantidad_vendida, AVG(b.calificacion) AS calificacion_promedio FROM producto as p FULL JOIN boleta as b ON p.id = b.id_producto GROUP BY p.id;
 
 -- vista calificaciones
-CREATE OR REPLACE VIEW calificaciones AS SELECT id,nombre_producto, rol_comprador,(SELECT usuario FROM usuario WHERE rol=rol_comprador) AS nombre_comprador, calificacion, comentario,fecha FROM boleta WHERE calificacion IS NOT NULL;
+CREATE OR REPLACE VIEW calificaciones AS SELECT id,id_producto,nombre_producto, rol_comprador,(SELECT usuario FROM usuario WHERE rol=rol_comprador) AS nombre_comprador, calificacion, comentario,fecha FROM boleta WHERE calificacion IS NOT NULL;
 
 -- vista para datos de usuario
 CREATE OR REPLACE VIEW usuario_info AS SELECT u.rol, u.usuario,u.correo,u.nacimiento, SUM(b.cantidad) AS cantidad_vendida, AVG(b.calificacion) AS calificacion_promedio, SUM(b.cantidad*b.precio_unidad) AS ganancias_totales FROM usuario as u FULL JOIN boleta as b ON u.rol = b.rol_vendedor GROUP BY u.rol;
