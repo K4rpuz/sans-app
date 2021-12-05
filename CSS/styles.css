@@ -771,6 +771,9 @@ nav a:hover{
   font-weight: bold;
 }
 
+.comentario-calificacion{
+  margin-left: 1rem;
+}
 .comentario-comentario{
   font-family: 'Corinthia';
   color: gray;

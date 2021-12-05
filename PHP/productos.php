@@ -128,8 +128,7 @@
 						?>	 </a>
 						<div class="comentario-calificacion">
 							<?php
-								$calificacion = $result['calificacion_promedio'];
-								$calificacion = 2;
+								$calificacion = $result['calificacion'];
 								for( $i = 0; $i < $calificacion; ++$i ){
 									echo '<img src="../IMG/estrella.png"class="img-calificacion"></img>';
 								}	
@@ -142,13 +141,14 @@
 					<p class="comentario-fecha"> <?php
 						echo $result['fecha'];
 					?></p>
+					</div>
 				<?php
 					
 				
-				/*foreach($result as $key => $value){
+			/*	foreach($result as $key => $value){
 					echo $key.": ".$value."<br>";
-						}*/
-				echo '</div>';
+						}
+						echo '</div>';*/
 				$result = $results->fetch(PDO::FETCH_ASSOC);
 			}
 				
