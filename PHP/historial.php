@@ -124,16 +124,20 @@
 
 				?>
 				<h1>Calificar</h1><hr>
-				<form action="productos.php" method="post" id="comentario_form">
+				<div class="contenedor-form">
+				<form action="productos.php" class="comentario-form" method="post" id="comentario_form">
 					<input type="hidden" name="action" value="add_calification">
 					<input type="hidden" name="id" value="<?php echo $result['id']; ?>">
+					<div class="comentario-calificacion">
+					</div>
 					<input type="range" name="calificacion" list="puntajes" min="1" max="5" step="1" value="<?php echo $result['calificacion']|0; ?>">
-					<label for="comentario_producto">Comentario acerca de su compra</label>
-					<textarea name="comentario" id="comentario_producto" cols="30" rows="10" form="comentario_form"><?php echo $result['comentario']; ?></textarea>
-					<input type="submit" value="Enviar">
+					<textarea name="comentario" id="comentario_producto" cols="30" rows="10" form="comentario_form" placeholder="La mejor compra que he..."><?php echo $result['comentario']; ?></textarea>
+					<input type="submit" value="Enviar" class="boton boton-amarillo boton--comentar">
 					<a href="historial.php?request=compras">Cancelar</a>
 				</form>
-				<?php
+				</div>
+				<script type="module" src="../JS/historial.js"></script>
+								<?php
 				break;
 		}
 
