@@ -1,7 +1,4 @@
 <?php
-	/*session_start();
-	$user = $_SESSION['user'];
-	if( empty($user) ) header("location: ../PHP/auth.php",true);*/
 	require_once 'header.php';
 	$user = getOrGoLogin('user')
 ?>
@@ -19,14 +16,16 @@
 							<input type="hidden" name="request" value="cambio-nombre">
 							<input type="text" name="user" id="" placeholder="Papa Francisco">
 						</form>
-						<a href="#" class="boton-editar-nombre"><img src="../IMG/editar.png" alt=""></a>
+						<a href="#" class="boton-editar-nombre"><img src="../IMG/editar.png" class="boton-perfil" alt=""></a>
 					</div>
 					<?php
 						$rol = $_SESSION['rol'];
-						$query = "SELECT correo FROM usuario WHERE rol='$rol'";
+						$query = "SELECT correo, nacimiento FROM usuario WHERE rol='$rol'";
 						$correo = "";
+						$nacimiento = "";
 						foreach( $pdo->query($query) as $fila){
 							$correo = $fila['correo'];
+							$nacimiento = $fila['nacimiento'];
 						}
 					?>
 					<div class="perfil-correo">
@@ -39,8 +38,21 @@
 							<input type="hidden" name="request" value="cambio-correo">
 							<input type="text" name="correo" id="" placeholder="Papa_Francisco@vaticano.cl">
 						</form>
-						<a href="#" class="boton-editar-correo"><img src="../IMG/editar.png" alt=""></a>
+						<a href="#" class="boton-editar-correo"><img src="../IMG/editar.png" class="boton-perfil" alt=""></a>
 					</div>	
+					<div class="perfil-nacimiento">
+						<p><span class="bold">Nacimiento</span></p>
+						<p class="p-nacimiento"> <?php
+							echo $nacimiento;	
+							?>
+						</p>
+						<form action="perfil_requests.php" class="form-cambio-nacimiento hide">
+							<input type="hidden" name="request" value="cambio-nacimiento">
+							<input type="date" name="nacimiento" id="" placeholder="30/10/2000">
+						</form>
+						<a href="#" class="boton-editar-nacimiento"><img src="../IMG/editar.png" class="boton-perfil" alt=""></a>
+					</div>	
+
 				</div>
 		</div>
 			
@@ -80,6 +92,32 @@
 							<button type="submit" class="boton-amarillo boton boton-historial-venta">Historial de venta</button>
 						</form>
 				</div>		
+			</div>
+	</div>
+	<div class="perfil-layout">
+			<h3>Stats</h3>			
+			<div class="perfil-info perfil-info--stats">
+			<div class="usuario-info-personal-dato">
+				<img src="../IMG/trade.png" class="usuario-info-icon" alt="Vendido">
+				<p> <?php
+					if($cantidad_vendida == "") echo "No tiene ventas.";
+					else echo $cantidad_vendida;
+				?> </p>
+			</div>
+			<div class="usuario-info-personal-dato">
+				<img src="../IMG/estrella.png" class="usuario-info-icon" alt="calificacion_promedio">
+				<p> <?php
+					if($calificacion_promedio == "") echo "No tiene calificaciones.";
+					else echo $calificacion_promedio;
+				?> </p>
+			</div>
+			<div class="usuario-info-personal-dato">
+				<img src="../IMG/money-bag.png" class="usuario-info-icon" alt="ganancias totales">
+				<p> <?php
+					if($ganancia_total == "") echo "No tiene ganancias.";
+					else echo $ganancia_total . ' $';
+				?> </p>
+			</div>	
 			</div>
 	</div>
 		<div class="perfil-layout">

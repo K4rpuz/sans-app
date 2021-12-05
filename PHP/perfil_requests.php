@@ -66,5 +66,17 @@
 				responseAndDie("Error: No se pudo borrar la cuenta");
 			}
 			break;
+		case 'cambio-nacimiento':
+			$fd = loadForm(array(
+				'nacimiento' => 'date'
+			));
+			$birthday = $fd['NACIMIENTO'];
+			try{
+				$pdo->query("UPDATE usuario SET nacimiento=TO_DATE('$birthday', 'YYYY-MM-DD') WHERE rol='$rol'");
+				responseAndDie("OK");
+			}catch(Exception $e){
+				responseAndDie('Error: No se pudo cambiar el correo');
+			}
+			break;
 	}
 ?>

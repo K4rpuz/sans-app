@@ -181,6 +181,8 @@ INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VA
 INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Martillo', 'Martillo de pared', 20000, 10, 'Herramientas', '202030513-7');
 INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Cuchillo', 'Cuchillo de cocina', 20000, 10, 'Herramientas', '202030513-7');
 
+CALL comprar_producto('202030538-2', 1, 2);
+CALL comprar_producto('202030538-2', 11, 5);
 CALL comprar_producto('202030533-1', 3, 5);
 CALL comprar_producto('202030536-5', 4, 4);
 CALL comprar_producto('202030549-4', 5, 3);

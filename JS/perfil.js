@@ -5,8 +5,8 @@ import { path } from "./config.js";
 document.addEventListener("DOMContentLoaded", ()=>{
 	const [ botonEditarNombre, botonEditarCorreo, botonCambioPass,
 		botonEliminarCuenta, formCambioNombre, formCambioCorreo,
-		pNombre, pCorreo,contenedorOpciones, formCambioPass,pErrorCambioPass] = loadElements(
-		[ 'boton-editar-nombre','boton-editar-correo','boton-cambio-password','boton-eliminar-cuenta','form-cambio-nombre','form-cambio-correo','p-nombre','p-correo','perfil-opciones', 'form-cambio-password','error-cambio-clave' ]
+		pNombre, pCorreo,contenedorOpciones, formCambioPass,pErrorCambioPass, pNacimiento, formCambioNacimiento, botonEditarNacimiento] = loadElements(
+		[ 'boton-editar-nombre','boton-editar-correo','boton-cambio-password','boton-eliminar-cuenta','form-cambio-nombre','form-cambio-correo','p-nombre','p-correo','perfil-opciones', 'form-cambio-password','error-cambio-clave','p-nacimiento','form-cambio-nacimiento','boton-editar-nacimiento' ]
 	);	
 
 	const [ dataNombre, postNombre ] = loadForm('form-cambio-nombre',()=>{});
@@ -77,4 +77,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
 		]);	
 		if( resp['ANSWER'] === 'OK' ) window.location.replace('./index.php');
 	});
+
+	const [ dataNacimiento, postNacimiento ] = loadForm('form-cambio-nacimiento',()=>{});
+	botonEditarNacimiento.addEventListener('click', async () => {
+		if( botonEditarNacimiento.innerHTML === '<img src="../IMG/editar.png" alt="">' ){
+			showElement(formCambioNacimiento);
+			hideElement(pNacimiento);
+			botonEditarNacimiento.innerHTML = '<img src="../IMG/confirmacion.png" alt="">';
+		}else{
+			hideElement(formCambioNacimiento);
+			showElement(pNacimiento);
+			botonEditarNacimiento.innerHTML = '<img src="../IMG/editar.png" alt="">';
+			const resp = await postNacimiento(path.perfil);
+			if( resp['ANSWER'] === 'OK' ) pNacimiento.innerHTML= dataNacimiento.valores['nacimiento'];
+			else console.log(resp['ANSWER']);
+			
+		}
+	});
+	
 });

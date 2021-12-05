@@ -35,9 +35,9 @@ create database sansapp;
 	- busqueda por categoria
 	- busqueda exitosa muestra info basica del producto/usuario y link
 - perfil
-	- edicion de datos y eliminacion de cuenta |**consultar que implica borrar todo registro asociado**
-	- mostrar cantidad de productos vendidos, comprados, usuario y correo
-	- historial de compras y ventas
+	~~ - edicion de datos y eliminacion de cuenta |**consultar que implica borrar todo registro asociado**~~
+	-~~ mostrar cantidad de productos vendidos, comprados, usuario y correo~~
+	-~~ historial de compras y ventas~~
 - Carrito
 	- edicion de productos en carrito
 	- mostrar info de los productos; cantidad, nombre, precio...
