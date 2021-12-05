@@ -25,8 +25,7 @@
 		}
 	}
 
-	if(isset($_GET['error'])){
-		echo '<script>alert("'.$_GET['error'].'");</script>';
+	if(isset($_GET['error'])){ echo '<script>alert("'.$_GET['error'].'");</script>';
 	}
 
 
@@ -120,9 +119,35 @@
 		else{
 			while($result){
 				echo '<div class="comment">';
-				foreach($result as $key => $value){
+				?>
+					<div class="cabecera-comentario">
+						<a href="usuarios.php?rol=<?php
+							echo $result['rol_comprador'];
+						?>" class="comentario-nombre-comprador"> <?php
+							echo $result['nombre_comprador'];
+						?>	 </a>
+						<div class="comentario-calificacion">
+							<?php
+								$calificacion = $result['calificacion_promedio'];
+								$calificacion = 2;
+								for( $i = 0; $i < $calificacion; ++$i ){
+									echo '<img src="../IMG/estrella.png"class="img-calificacion"></img>';
+								}	
+							?>
+						</div>
+					</div>
+					<p class="comentario-comentario"> <?php
+						echo $result['comentario'];
+					?></p>
+					<p class="comentario-fecha"> <?php
+						echo $result['fecha'];
+					?></p>
+				<?php
+					
+				
+				/*foreach($result as $key => $value){
 					echo $key.": ".$value."<br>";
-				}
+						}*/
 				echo '</div>';
 				$result = $results->fetch(PDO::FETCH_ASSOC);
 			}

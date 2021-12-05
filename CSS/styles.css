@@ -692,23 +692,29 @@ nav a:hover{
 
 .top-layout:nth-of-type(1){
   background-color: var(--lighten-maximum-red);
+  transition: background-color .7s;
 }
 
 .top-layout:nth-of-type(1) .top-item:hover{
   background-color: var(--maximum-red);
+  transition: background-color .7s;
 }
 
 .top-layout:nth-of-type(2){
   background-color: var(--blue-green);
+  transition: background-color .7s;
 }
 .top-layout:nth-of-type(2) .top-item:hover{
   background-color: var(--blue-sapphire);
+  transition: background-color .7s;
 }
 .top-layout:nth-of-type(3){
   background-color: var(--lighten-jonquil);
+  transition: background-color .7s;
 }
 .top-layout:nth-of-type(3) .top-item:hover{
   background-color: var(--jonquil);
+  transition: background-color .7s;
 }
 .top-item{
   display: grid;
@@ -738,4 +744,42 @@ nav a:hover{
   text-align: center;
   color: white;
   width: 100% !important;
+}
+
+.comments{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-items: center;
+}
+.comment{
+  margin: 0 auto;
+  width: 60%;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10rem;
+  padding: 4rem;
+  margin: 2rem;
+}
+
+.cabecera-comentario{
+  display: flex;
+  align-items: center;  
+}
+
+.cabecera-comentario a{
+  font-size: 2rem !important;
+  font-weight: bold;
+}
+
+.comentario-comentario{
+  font-family: 'Corinthia';
+  color: gray;
+  font-size: 2rem;
+}
+
+.comentario-fecha{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  color: gray;
+  text-align: right;
 }
