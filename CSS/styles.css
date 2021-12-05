@@ -694,14 +694,22 @@ nav a:hover{
   background-color: var(--lighten-maximum-red);
 }
 
+.top-layout:nth-of-type(1) .top-item:hover{
+  background-color: var(--maximum-red);
+}
+
 .top-layout:nth-of-type(2){
   background-color: var(--blue-green);
 }
-
+.top-layout:nth-of-type(2) .top-item:hover{
+  background-color: var(--blue-sapphire);
+}
 .top-layout:nth-of-type(3){
   background-color: var(--lighten-jonquil);
 }
-
+.top-layout:nth-of-type(3) .top-item:hover{
+  background-color: var(--jonquil);
+}
 .top-item{
   display: grid;
   align-items: center;
@@ -711,3 +719,4 @@ nav a:hover{
   justify-content: left;
   width: 50%;
 }
+

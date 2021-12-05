@@ -45,7 +45,6 @@
 				<div class="boleta-calificacion">
 					<?php
 						$calificacion = $result['calificacion_promedio'];
-						$calificacion = 5;
 						for( $i = 0; $i < $calificacion; ++$i ){
 							echo '<img src="../IMG/estrella.png"class="img-calificacion"></img>';
 						}
