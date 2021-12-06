@@ -22,6 +22,19 @@
 		</div>
 		
 		<nav>
+			<div class="navbar-element categorias">
+						<h3>Categorias</h3>
+						<div class="categorias-links">
+							<?php
+								{
+								foreach($pdo->query('SELECT nombre FROM categoria') as $row) {
+									echo '<a href="search.php?tipo=categorias&busqueda='.$row['nombre'].'">'.$row['nombre'].'</a>';
+								}
+								}
+							?>
+		
+						</div>
+		</div>
 			<div class="navbar-element">
 				<?php
 						session_start();
@@ -29,14 +42,13 @@
 						$user = isset($_SESSION['user'])?$_SESSION['user']:null;
 							
 						?>
-						<div class="categorias">
-							<p>Categorias</p>
-						</div>
+						
 						<?php
 						if( empty($user) ) echo '<a href="auth.php">Iniciar Sesión</a>';
 						else{
 							$result = $pdo->query("SELECT count(*) FROM carrito WHERE rol_usuario = '".$_SESSION['rol']."'")->fetch(PDO::FETCH_ASSOC);
 							echo '<a href="carrito.php">Carrito ('.$result['count'].')</a>';	
+							echo '<a href="productos.php">Mis productos</a>';	
 							echo '<a href="perfil.php" class="nombre-usuario">'.$user.'</a>';	
 							echo '<a href="auth.php">Logout</a>';	
 						} 

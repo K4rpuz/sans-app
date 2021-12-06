@@ -69,8 +69,6 @@
 			</div>
 			
 		</div>
-		<div class="usuario-info-movimientos">
-		</div>
 	</section>
 </div>
 
