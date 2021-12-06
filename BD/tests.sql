@@ -247,3 +247,5 @@ SELECT p.id, p.nombre, p.precio, p.vendedor, SUM(b.cantidad) AS cantidad_vendida
 
 SELECT * FROM calificaciones;
 SELECT id,id_producto,nombre_producto, rol_comprador,(SELECT usuario FROM usuario WHERE rol=rol_comprador) AS nombre_comprador, calificacion, comentario,fecha FROM boleta WHERE calificacion IS NOT NULL;
+
+SELECT * FROM producto_info WHERE nombre LIKE 'MU';

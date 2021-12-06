@@ -64,7 +64,7 @@
 				$categorias = explode(',',$_POST['categoria']);
 				foreach($categorias as $categoria){
 					try{
-						$pdo->exec("INSERT INTO categoria(nombre) VALUES ('".trim($categoria)."')");
+						$pdo->exec("INSERT INTO categoria(nombre) VALUES ('".strtolower(trim($categoria))."')");
 					}catch(PDOException $e){;}
 				}
 			break;

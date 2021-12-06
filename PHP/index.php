@@ -1,7 +1,15 @@
 <?php
 	require_once 'header.php';
 ?>
-
+	<div class="categorias">
+	<?php
+			{
+			foreach($pdo->query('SELECT nombre FROM categoria') as $row) {
+				echo '<a href="search.php?tipo=categorias&busqueda='.$row['nombre'].'">'.$row['nombre'].'</a><br>';
+			}
+			}
+		?>
+	</div>
 
 	<div class="top-vendedores top-layout">
 		<h1>TOP 5 VENDEDORES</h1>
