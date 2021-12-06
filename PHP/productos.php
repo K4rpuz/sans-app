@@ -112,11 +112,11 @@
 			</div>
 		</section>
 				<?php
-		echo '<hr><div class="comments">';
 		$results = $pdo->query("SELECT * FROM calificaciones WHERE id_producto = '".$_GET['sku']."'");
 		$result = $results->fetch(PDO::FETCH_ASSOC);
-		if(!$result) echo "Este producto aun no tiene calificaciones";
+		if(!$result) echo '<div class="contenedor-aviso-productos"><h3 class="aviso-productos">'."Este producto aun no tiene calificaciones</h3>".'<img class="icon-aviso" src="../IMG/sad.png" alt="icono-triste"></img></div>';
 		else{
+		echo '<hr><div class="comments">';
 			while($result){
 				echo '<div class="comment">';
 				?>

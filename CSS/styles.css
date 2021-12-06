@@ -816,3 +816,27 @@ nav a:hover{
   font-weight: bold;
   margin-bottom: 2rem;
 }
+
+.contenedor-producto--mini{
+  width: 85%;
+}
+
+.contenedor-productos-perfil{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+}
+
+.aviso-productos{
+  text-align: center;
+}
+
+.icon-aviso{
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contenedor-aviso-productos{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

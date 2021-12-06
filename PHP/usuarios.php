@@ -25,30 +25,8 @@
 		$cantidad_vendida = $result['cantidad_vendida'];
 		$calificacion_promedio = $result['calificacion_promedio'];
 		$ganancia_total = $result['ganancias_totales'];
-		$results = $pdo->query("SELECT * FROM producto_info WHERE vendedor= '".$_GET['rol']."'");
-		$result = $results->fetch(PDO::FETCH_ASSOC);
-		if(!$result) echo "Este usuario no tiene productos en venta";
-		
-		else{
-			while($result){
-
-				echo '<div class="comment">';
-				foreach($result as $key => $value){
-					echo $key.": ".$value."<br>";
-				}
-				echo '</div><br>';
-				$result = $results->fetch(PDO::FETCH_ASSOC);
-				
-			}
-				
-		}
-
-
-		
-	}else{
-		die("No se ha recibido el rol del usuario"); 	
-	}
-?>
+			
+		?>
 
 <div class="container">
 	<section class="perfil-usuario ">
@@ -95,6 +73,94 @@
 		</div>
 	</section>
 </div>
+
+
+<?php
+	
+		$results = $pdo->query("SELECT * FROM producto_info WHERE vendedor= '".$_GET['rol']."'");
+		$result = $results->fetch(PDO::FETCH_ASSOC);
+		if(!$result) echo "Este usuario no tiene productos en venta";
+		
+		else{
+			
+		?>	
+
+		<div class="contenedor-productos-perfil">
+<?php
+	
+			while($result){			
+				?>
+				<div class="contenedor-producto contenedor-producto--mini">	
+			<div class="producto-cabecera">
+				<a href="productos.php?sku=<?php
+					echo $result['id'];
+				?>">
+				<h3> <?php
+					echo $result['nombre'];
+?> </h3> </a>
+				<div class="boleta-calificacion">
+					<?php
+						$calificacion = $result['calificacion_promedio'];
+						for( $i = 0; $i < $calificacion; ++$i ){
+							echo '<img src="../IMG/estrella.png"class="img-calificacion"></img>';
+						}
+
+					?>
+				</div>
+							</div>
+			
+			<p class="producto-descripcion"> <?php
+				echo $result['descripcion'];
+			?> </p>
+			<p class="producto-precio">
+					Precio:
+					<?php
+						echo $result['precio'];
+					?>
+					$
+			</p>
+			<p class="producto-categoria">
+			
+				Categoria: 
+				<?php
+					echo $result['categoria'];
+				?>
+			</p>
+
+			<p class="producto-cantidad-vendida">
+				Se ha vendido: 
+				<?php
+					echo $result['cantidad_vendida'];
+				?>
+					veces.
+			</p>
+
+			</div>
+				<?php
+					
+				/*echo '<div class="">';
+				foreach($result as $key => $value){
+					echo $key.": ".$value."<br>";
+				}
+				echo '</div><br>';*/
+				$result = $results->fetch(PDO::FETCH_ASSOC);
+			
+			}			
+		}
+			
+		?>
+
+		</div>
+		<?php
+			
+
+		
+	}else{
+		die("No se ha recibido el rol del usuario"); 	
+	}
+?>
+
+
 	
 <?php
 	require_once "footer.php";
