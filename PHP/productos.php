@@ -22,6 +22,46 @@
 				}
 				header('location: historial.php?request=compras',true);
 				break;
+			case 'form_producto':
+				?>
+					<form action="productos.php" method="post">
+						<input type="hidden" name="action" value="add_producto">
+						<?php
+						$result = null;
+						if(isset($_POST['id'])){
+							$result = $pdo->query("SELECT * FROM producto_info WHERE id = '".$_POST['id']."'")->fetch(PDO::FETCH_ASSOC);
+							echo '<input type="hidden" name="id" value="'.$result['id'].'">';
+						}
+						?>
+						<input type="hidden" name="vendedor" value="<?php echo $rol ?>">
+						<input type="text" name="nombre" value="<?php echo ($result)?$result['nombre']:''?>" autocomplete="off" required>
+						<input type="text" name="descripcion" value="<?php echo ($result)?$result['descripcion']:''?>" autocomplete="off" required>
+						<input type="text" name="precio" value="<?php echo ($result)?$result['precio']:''?>" autocomplete="off" required>
+						<input type="text" name="stock" value="<?php echo ($result)?$result['stock']:''?>" autocomplete="off" required>
+						<input type="text" name="categoria" value="<?php echo ($result)?$result['categoria']:''?>" autocomplete="off" required>
+						<input type="submit" value="Agregar">
+						<a href="productos.php">Cancelar</a>
+					</form>
+				<?php
+				die();
+			break;
+			case 'add_producto':
+				if(isset($_POST['id'])){
+					try{
+						$pdo->exec("UPDATE producto SET nombre = '".$_POST['nombre']."', descripcion = '".$_POST['descripcion']."', precio = ".$_POST['precio'].", stock = ".$_POST['stock'].", categoria = '".$_POST['categoria']."' WHERE id = ".$_POST['id']);
+					}catch(PDOException $e){
+						echo $e->getMessage();
+						header('location: productos.php?&error="No se ha podido editar el producto"',true);
+					}
+				}else{
+					try{
+						$pdo->exec("INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('".$_POST['nombre']."', '".$_POST['descripcion']."', ".$_POST['precio'].", ".$_POST['stock'].", '".$_POST['categoria']."', '".$rol."')");
+					}catch(PDOException $e){
+						echo $e->getMessage();
+						header('location: productos.php?sku=&error="No se ha podido agregar el producto"',true);
+					}
+				}
+			break;
 		}
 	}
 
@@ -161,12 +201,25 @@
 		$rol = getOrGoLogin('rol');
 		$results = $pdo->query("SELECT * FROM producto WHERE vendedor= '$rol'");
 		$result = $results->fetch(PDO::FETCH_ASSOC);
+		?>
+		<form action="productos.php" method="post">
+			<button type="submit" name="action" value="form_producto">Añadir producto</button>
+		</form>
+
+		<?php
 		if(!$result) echo "No tienes productos en venta";
 		
 		else{
 			while($result){
 
 				echo '<div class="comment">';
+				?>
+				<form action="productos.php" method="post">
+					<input type="hidden" name="id" value="<?php echo $result['id']; ?>">
+					<button type="submit" name="action" value="form_producto">Editar producto</button>
+				</form>
+
+				<?php
 				foreach($result as $key => $value){
 					echo $key.": ".$value."<br>";
 				}
