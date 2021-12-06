@@ -61,6 +61,12 @@
 						header('location: productos.php?sku=&error="No se ha podido agregar el producto"',true);
 					}
 				}
+				$categorias = explode(',',$_POST['categoria']);
+				foreach($categorias as $categoria){
+					try{
+						$pdo->exec("INSERT INTO categoria(nombre) VALUES ('".trim($categoria)."')");
+					}catch(PDOException $e){;}
+				}
 			break;
 		}
 	}

@@ -8,7 +8,12 @@
 			</a>
 			<section class="barra-busqueda">	
 				<form action="search.php" method="GET">
-					<input type="text" name="name" id="" placeholder="Buscar..." autocomplete="off">
+					<select name="tipo" id="">
+						<option value="productos">Productos</option>
+						<option value="usuarios">Usuarios</option>
+						<option value="categorias">Categoria</option>
+					</select>
+					<input type="text" name="busqueda" id="" placeholder="Buscar..." autocomplete="off">
 				</form>
 				<div class="barra-busqueda__resultados"></div>
 			</section>

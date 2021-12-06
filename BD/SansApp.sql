@@ -4,6 +4,7 @@ DROP VIEW IF EXISTS producto_info;
 DROP VIEW IF EXISTS view_carrito;
 DROP VIEW IF EXISTS top_vendedor;
 DROP VIEW IF EXISTS top_mas_vendidos;
+DROP TABLE IF EXISTS categoria;
 DROP TABLE IF EXISTS carrito;
 DROP TABLE IF EXISTS boleta;
 DROP TABLE IF EXISTS producto;
@@ -51,6 +52,10 @@ CREATE TABLE carrito (
 	PRIMARY KEY (rol_usuario, id_producto),
 	CONSTRAINT fk_usuario FOREIGN KEY (rol_usuario) REFERENCES usuario(rol) ON DELETE CASCADE,
 	CONSTRAINT fk_producto FOREIGN KEY (id_producto) REFERENCES producto(id) ON DELETE CASCADE
+);
+
+CREATE TABLE categoria (
+	nombre VARCHAR(30) NOT NULL PRIMARY KEY
 );
 
 
