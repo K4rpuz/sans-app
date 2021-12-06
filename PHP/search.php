@@ -6,11 +6,11 @@ if(isset($_GET['busqueda'])){
 
 	try{
 		if($_GET['tipo'] == "productos"){
-			$results = $pdo->query("SELECT * FROM producto_info WHERE nombre LIKE '%".$_GET['busqueda']."%'");
+			$results = $pdo->query("SELECT * FROM producto_info WHERE LOWER(nombre) LIKE '%".strtolower($_GET['busqueda'])."%'");
 		}else if($_GET['tipo'] == "categorias"){
-			$results = $pdo->query("SELECT * FROM categoria WHERE nombre LIKE '%".$_GET['busqueda']."%'");
+			$results = $pdo->query("SELECT * FROM producto_info WHERE LOWER(categoria) LIKE '%".strtolower($_GET['busqueda'])."%'");
 		}else if($_GET['tipo'] == "usuarios"){
-			$results = $pdo->query("SELECT * FROM usuario_info WHERE usuario LIKE '%".$_GET['busqueda']."%'");
+			$results = $pdo->query("SELECT * FROM usuario_info WHERE LOWER(usuario) LIKE '%".strtolower($_GET['busqueda'])."%'");
 		}
 	}catch(PDOException $e){
 		echo $e->getMessage();
