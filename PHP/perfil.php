@@ -20,18 +20,13 @@
 					</div>
 					<?php
 						$rol = $_SESSION['rol'];
-						$query = "SELECT correo, nacimiento FROM usuario WHERE rol='$rol'";
-						$correo = "";
-						$nacimiento = "";
-						foreach( $pdo->query($query) as $fila){
-							$correo = $fila['correo'];
-							$nacimiento = $fila['nacimiento'];
-						}
+						$result = $pdo->query("SELECT * FROM usuario_info WHERE rol = '$rol'")->fetch(PDO::FETCH_ASSOC);
+						if(!$result) die('<div class="alerta">Usuario no encontrado</div>');
 					?>
 					<div class="perfil-correo">
 						<p><span class="bold">Correo</span></p>
 						<p class="p-correo"> <?php
-							echo $correo;	
+							echo $result['correo'];	
 							?>
 						</p>
 						<form action="perfil_requests.php" class="form-cambio-correo hide">
@@ -43,7 +38,7 @@
 					<div class="perfil-nacimiento">
 						<p><span class="bold">Nacimiento</span></p>
 						<p class="p-nacimiento"> <?php
-							echo $nacimiento;	
+							echo $result['nacimiento'];	
 							?>
 						</p>
 						<form action="perfil_requests.php" class="form-cambio-nacimiento hide">
@@ -62,12 +57,12 @@
 				<div class="perfil-compras">
 							<p><span class="bold">Compras</span></p>
 							<p> <?php 
-							$cantidadCompras = 0;
+
+							foreach($pdo->query("SELECT count(*), count(calificacion) AS calificadas FROM boleta WHERE rol_comprador='$rol'") as $fila){
+								$cantidadCompras = $fila['count'];
+								$comprasSinCalificar = $cantidadCompras-$fila['calificadas'];
+							}
 							echo $cantidadCompras;
-						foreach($pdo->query("SELECT count(*), count(calificacion) AS calificadas FROM boleta WHERE rol_comprador='$rol'") as $fila){
-							$cantidadCompras = $fila['count'];
-							$comprasSinCalificar = $cantidadCompras-$fila['calificadas'];
-						}
 							
 
 						?></p>
@@ -84,14 +79,7 @@
 				</div>
 				<div class="perfil-ventas">
 							<p><span class="bold">Ventas</span></p>
-							<p> <?php
-							$cantidadVentas = 0;
-						foreach($pdo->query("SELECT count(*) FROM boleta WHERE rol_vendedor='$rol'") as $fila){
-							$cantidadVentas = $fila['count'];
-						}
-							echo $cantidadVentas;
-								?>
-							</p>
+							<p> <?php echo $result['cantidad_vendida']; ?> </p>
 						<form action="historial.php" method="GET">
 							<input type="hidden" name="request" value="ventas">
 							<button type="submit" class="boton-amarillo boton boton-historial-venta">Historial de venta</button>
@@ -105,22 +93,22 @@
 			<div class="usuario-info-personal-dato">
 				<img src="../IMG/trade.png" class="usuario-info-icon" alt="Vendido">
 				<p> <?php
-					if($cantidad_vendida == "") echo "No tiene ventas.";
-					else echo $cantidad_vendida;
+					if($result['cantidad_vendida'] == "") echo "No tiene ventas.";
+					else echo $result['cantidad_vendida'];
 				?> </p>
 			</div>
 			<div class="usuario-info-personal-dato">
 				<img src="../IMG/estrella.png" class="usuario-info-icon" alt="calificacion_promedio">
 				<p> <?php
-					if($calificacion_promedio == "") echo "No tiene calificaciones.";
-					else echo $calificacion_promedio;
+					if($result['calificacion_promedio'] == "") echo "No tiene calificaciones.";
+					else echo $result['calificacion_promedio'];
 				?> </p>
 			</div>
 			<div class="usuario-info-personal-dato">
 				<img src="../IMG/money-bag.png" class="usuario-info-icon" alt="ganancias totales">
 				<p> <?php
-					if($ganancia_total == "") echo "No tiene ganancias.";
-					else echo $ganancia_total . ' $';
+					if($result['ganancias_totales'] == "") echo "No tiene ganancias.";
+					else echo $result['ganancias_totales'] . ' $';
 				?> </p>
 			</div>	
 			</div>

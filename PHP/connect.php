@@ -16,6 +16,9 @@ function connect(string $host, string $db, string $dbPort, string $user, string 
 function getOrGoLogin($parameter){
 	if(session_status() == PHP_SESSION_NONE) session_start();
 	$p = $_SESSION[$parameter];
-	if(empty($p)) header('location: auth.php',true);
+	if(empty($p)){
+		header('location: auth.php',true);
+		die();
+	}
 	return $p;
 }

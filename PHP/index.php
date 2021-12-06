@@ -34,7 +34,7 @@
 	</div>
 
 	<div class="top-productos-calificaciones top-layout">
-		<h1>TOP 5 PRODUCTOS MAS VENDIDOS</h1>
+		<h1>TOP 5 PRODUCTOS MEJOR CALIFICADOS</h1>
 		<?php
 			{
 			$counter = 0;

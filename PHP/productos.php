@@ -157,7 +157,26 @@
 
 		
 	}else{
-		//die("No se ha recibido el sku"); 	
+
+		$rol = getOrGoLogin('rol');
+		$results = $pdo->query("SELECT * FROM producto WHERE vendedor= '$rol'");
+		$result = $results->fetch(PDO::FETCH_ASSOC);
+		if(!$result) echo "No tienes productos en venta";
+		
+		else{
+			while($result){
+
+				echo '<div class="comment">';
+				foreach($result as $key => $value){
+					echo $key.": ".$value."<br>";
+				}
+				echo '</div><br>';
+				$result = $results->fetch(PDO::FETCH_ASSOC);
+				
+			}
+				
+		}
+		
 	}
 ?>
 <script type="module" src="../JS/productos.js"></script>

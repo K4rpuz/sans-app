@@ -31,14 +31,14 @@
 		
 		else{
 			while($result){
-				$result = false;
-				/*echo '<div class="comment">';
+
+				echo '<div class="comment">';
 				foreach($result as $key => $value){
 					echo $key.": ".$value."<br>";
 				}
 				echo '</div><br>';
 				$result = $results->fetch(PDO::FETCH_ASSOC);
-				*/
+				
 			}
 				
 		}
