@@ -8,13 +8,15 @@
 			</a>
 			<section class="barra-busqueda">	
 				<form action="search.php" method="GET">
-					<select name="tipo" id="">
-						<option value="productos">Productos</option>
-						<option value="usuarios">Usuarios</option>
-						<option value="categorias">Categoria</option>
-					</select>
-					<input type="text" name="busqueda" id="" placeholder="Buscar..." autocomplete="off">
-				</form>
+					<div class="barra-contenedor">
+						<input type="text" name="busqueda" id="" placeholder="Buscar..." autocomplete="off">
+						<select name="tipo" id="">
+							<option value="productos">Productos</option>
+							<option value="usuarios">Usuarios</option>
+							<option value="categorias">Categoria</option>
+						</select>
+					</div>
+					</form>
 				<div class="barra-busqueda__resultados"></div>
 			</section>
 		</div>
@@ -25,6 +27,12 @@
 						session_start();
 
 						$user = isset($_SESSION['user'])?$_SESSION['user']:null;
+							
+						?>
+						<div class="categorias">
+							<p>Categorias</p>
+						</div>
+						<?php
 						if( empty($user) ) echo '<a href="auth.php">Iniciar Sesión</a>';
 						else{
 							$result = $pdo->query("SELECT count(*) FROM carrito WHERE rol_usuario = '".$_SESSION['rol']."'")->fetch(PDO::FETCH_ASSOC);
