@@ -1,3 +1,5 @@
+
+DROP VIEW IF EXISTS top_calificaciones;
 DROP VIEW IF EXISTS usuario_info;
 DROP VIEW IF EXISTS calificaciones;
 DROP VIEW IF EXISTS producto_info;
@@ -175,16 +177,20 @@ CALL comprar_producto('202030549-4', 1, 1);
 CALL comprar_producto('202030510-1', 1, 1);
 CALL comprar_producto('202030515-0', 1, 1);
 
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Celular', 'Celular de google', 20000, 10, 'Electronico', '202030510-1');
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Laptop', 'Microsoft Surface', 30000, 6, 'Electronico', '202030513-7');
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Television', 'Samsung', 20000, 10, 'Electronico', '202030538-2');
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Vestido', 'Vestido de verano', 20000, 10, 'Ropa', '202030549-4');
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Zapatos', 'Zapatos de verano', 20000, 10, 'Ropa', '202030549-4');
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Pantalon', 'Pantalon de verano', 20000, 10, 'Ropa', '202030549-4');
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Aspiradora', 'Aspiradora Philips', 20000, 10, 'Electronico', '202030536-5');
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Lavadora', 'Lavadora LG', 20000, 10, 'Electronico', '202030536-5');
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Martillo', 'Martillo de pared', 20000, 10, 'Herramientas', '202030513-7');
-INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Cuchillo', 'Cuchillo de cocina', 20000, 10, 'Herramientas', '202030513-7');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Celular', 'Celular de google', 20000, 10, 'electronico', '202030510-1');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Laptop', 'Microsoft Surface', 30000, 6, 'electronico', '202030513-7');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Television', 'Samsung', 20000, 10, 'electronico', '202030538-2');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Vestido', 'Vestido de verano', 20000, 10, 'ropa', '202030549-4');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Zapatos', 'Zapatos de verano', 20000, 10, 'ropa', '202030549-4');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Pantalon', 'Pantalon de verano', 20000, 10, 'ropa', '202030549-4');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Aspiradora', 'Aspiradora Philips', 20000, 10, 'electronico', '202030536-5');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Lavadora', 'Lavadora LG', 20000, 10, 'electronico', '202030536-5');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Martillo', 'Martillo de pared', 20000, 10, 'herramientas', '202030513-7');
+INSERT INTO producto(nombre, descripcion, precio, stock, categoria, vendedor) VALUES ('Cuchillo', 'Cuchillo de cocina', 20000, 10, 'herramientas', '202030513-7');
+
+INSERT INTO categoria(nombre) VALUES ('electronico');
+INSERT INTO categoria(nombre) VALUES ('ropa');
+INSERT INTO categoria(nombre) VALUES ('herramientas');
 
 CALL comprar_producto('202030538-2', 1, 2);
 CALL comprar_producto('202030538-2', 11, 5);

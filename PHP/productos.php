@@ -158,11 +158,13 @@
 			</div>
 		</section>
 				<?php
+		$total = $pdo->query("SELECT count(*) FROM calificaciones WHERE id_producto = '".$_GET['sku']."'")->fetch(PDO::FETCH_ASSOC)['count'];
 		$results = $pdo->query("SELECT * FROM calificaciones WHERE id_producto = '".$_GET['sku']."'");
 		$result = $results->fetch(PDO::FETCH_ASSOC);
 		if(!$result) echo '<div class="contenedor-aviso-productos"><h3 class="aviso-productos">'."Este producto aun no tiene calificaciones</h3>".'<img class="icon-aviso" src="../IMG/sad.png" alt="icono-triste"></img></div>';
 		else{
 		echo '<hr><div class="comments">';
+		echo '<h3 class="comments-title">Comentarios:'.$total.'</h3>';
 			while($result){
 				echo '<div class="comment">';
 				?>
