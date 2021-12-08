@@ -32,11 +32,11 @@
 					</div>
 					<div>
 						<p>Usuario</p>
-						<input type="text" name="user" id="" placeholder="Darcy" autocomplete="off">
+						<input type="text" name="user" id="" placeholder="soySansano21" autocomplete="off">
 					</div>
 					<div>
 						<p>Email</p>
-						<input type="email" name="email" id="" placeholder="Darcy@prestigio.usm.cl" autocomplete="off">
+						<input type="email" name="email" id="" placeholder="sansano@usm.cl" autocomplete="off">
 					</div>
 					<div>
 						<p>Fecha de nacimiento</p>

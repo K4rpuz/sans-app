@@ -191,6 +191,23 @@ nav a:hover{
 }
 
 /* Barra de busqueda */
+.barra-contenedor{
+  display: grid;
+  grid-template-columns: 80% 20%;
+  box-shadow: 1px 1px 10px inset black;
+  padding: .1rem;
+  overflow: hidden;
+}
+.barra-contenedor:hover{
+  outline: .1rem solid var(--maximum-red);
+}
+.barra-contenedor select{
+  font-size: 2rem;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
 .barra-busqueda{
   margin-left: 5rem;
 }
@@ -198,6 +215,11 @@ nav a:hover{
   font-family: Arial, Helvetica, sans-serif;
   border-radius: 0;
   width: 60rem;
+  border: none;
+  font-size: 1.8rem;
+}
+.barra-busqueda input[type='text']:focus{
+  outline: none;
 }
 .barra-busqueda__resultados{
   position: absolute;
@@ -776,8 +798,7 @@ nav a:hover{
 }
 .comentario-comentario{
   font-family: 'Corinthia';
-  color: gray;
-  font-size: 2rem;
+  color: gray; font-size: 2rem;
 }
 
 .comentario-fecha{
@@ -839,4 +860,106 @@ nav a:hover{
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.resultados-busqueda{
+  display: grid;
+  grid-template-columns: 33.333% 33.333% 33.33%;
+  grid-gap: 2rem;
+  margin: 0 auto;
+  padding: 5rem;
+  justify-items: center;
+}
+
+.categorias{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.categorias h3{
+  color: var(--blue-sapphire);
+}
+
+.categorias:hover > .categorias-links{
+  display: flex;
+  flex-direction: column;
+  top: 4rem;
+  z-index: 100;
+  background-color: var(--blue-sapphire);
+}
+
+.categorias:hover > .categorias-links >a{
+  z-index: 102;
+  color: white !important;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+.categorias:hover > .categorias-links >a:hover{
+  color: white;
+  background-color: var(--lighten-jonquil);
+}
+
+
+.categorias-links{
+  display: none;
+  position: absolute;
+}
+
+.categorias-button{
+  padding: 5rem;
+}
+
+.categorias h3{
+  height: 100%;
+}
+
+.perfil-usuario--mini{
+  width: 80%;
+}
+
+.usuario-info-personal--mini{
+  padding: 0;
+  padding-left: 2rem;
+}
+
+.form-mis-productos{
+  display: flex;
+  justify-content: space-between;
+}
+.form-mis-productos > .boton{
+  margin: 2rem;
+}
+
+.icono-add-producto{
+  background: transparent;
+  background-image: url('../IMG/add.png');
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  padding: 7rem;
+}
+.form-opciones-producto{
+  text-align: center;
+  margin: 5rem;
+}
+
+.boton-cambio-password{
+  font-size: 1.2rem;
+}
+
+.boton-eliminar-cuenta{
+  font-size: 1.2rem;
+}
+
+.add-productos{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  margin: 0 auto;
+  width: 60%;
+}
+
+.boton-add-producto{
+  margin-top: 5rem;
 }

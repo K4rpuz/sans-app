@@ -24,7 +24,7 @@
 				break;
 			case 'form_producto':
 				?>
-					<form action="productos.php" method="post">
+					<form action="productos.php" method="post" class="add-productos">
 						<input type="hidden" name="action" value="add_producto">
 						<?php
 						$result = null;
@@ -34,12 +34,28 @@
 						}
 						?>
 						<input type="hidden" name="vendedor" value="<?php echo $rol ?>">
-						<input type="text" name="nombre" value="<?php echo ($result)?$result['nombre']:''?>" autocomplete="off" required>
-						<input type="text" name="descripcion" value="<?php echo ($result)?$result['descripcion']:''?>" autocomplete="off" required>
-						<input type="text" name="precio" value="<?php echo ($result)?$result['precio']:''?>" autocomplete="off" required>
-						<input type="text" name="stock" value="<?php echo ($result)?$result['stock']:''?>" autocomplete="off" required>
-						<input type="text" name="categoria" value="<?php echo ($result)?$result['categoria']:''?>" autocomplete="off" required>
-						<input type="submit" value="Agregar">
+						<div class="campo-form">
+							<p>Nombre</p>
+							<input type="text" placeholder="Llavero Sansapp" name="nombre" value="<?php echo ($result)?$result['nombre']:''?>" autocomplete="off" required>
+						</div>
+						<div class="campo-form">
+							<p>Descripción</p>
+							<input type="text" placeholder="Es un artefacto muy útil..." name="descripcion" value="<?php echo ($result)?$result['descripcion']:''?>" autocomplete="off" required>
+						</div>
+						<div class="campo-form">
+							<p>Precio</p>
+							<input type="text" placeholder="30000$" name="precio" value="<?php echo ($result)?$result['precio']:''?>" autocomplete="off" required>
+						</div>
+						<div class="campo-form">
+							<p>Stock</p>
+							<input type="text" placeholder="10" name="stock" value="<?php echo ($result)?$result['stock']:''?>" autocomplete="off" required>
+						</div>
+						<div class="campo-form">
+							<p>Categoria</p>
+							<input type="text" name="categoria" placeholder="Electrónico,Herramientas,Armas..." value="<?php echo ($result)?$result['categoria']:''?>" autocomplete="off" required>
+						</div>
+						
+						<input type="submit" value="Agregar" class="boton boton-amarillo boton-add-producto">
 						<a href="productos.php">Cancelar</a>
 					</form>
 				<?php
@@ -210,8 +226,8 @@
 		$results = $pdo->query("SELECT * FROM producto WHERE vendedor= '$rol'");
 		$result = $results->fetch(PDO::FETCH_ASSOC);
 		?>
-		<form action="productos.php" method="post">
-			<button type="submit" name="action" value="form_producto">Añadir producto</button>
+		<form action="productos.php" method="post" class="form-opciones-producto">
+			<button type="submit" name="action" value="form_producto" class="icono-add-producto"></button>
 		</form>
 
 		<?php
@@ -220,18 +236,62 @@
 		else{
 			while($result){
 
-				echo '<div class="comment">';
+				echo '<div class="contenedor-producto contenedor-producto--mini">';
 				?>
-				<form action="productos.php" method="post">
-					<input type="hidden" name="id" value="<?php echo $result['id']; ?>">
-					<button type="submit" name="action" value="form_producto">Editar producto</button>
-				</form>
+				<div class="producto-cabecera">
+					<a href="productos.php?sku=<?php
+						echo $result['id'];
+					?>">
+					<h3> <?php
+						echo $result['nombre'];
+	?> </h3> </a>
+					<div class="boleta-calificacion">
+						<?php
+							$calificacion = $result['calificacion_promedio'];
+							for( $i = 0; $i < $calificacion; ++$i ){
+								echo '<img src="../IMG/estrella.png"class="img-calificacion"></img>';
+							}
+
+						?>
+					</div>
+								</div>
+				
+				<p class="producto-descripcion"> <?php
+					echo $result['descripcion'];
+				?> </p>
+				<p class="producto-precio">
+						Precio:
+						<?php
+							echo $result['precio'];
+						?>
+						$
+				</p>
+				<p class="producto-categoria">
+				
+					Categoria: 
+					<?php
+						echo $result['categoria'];
+					?>
+				</p>
+
+				
+				<div class="form-mis-productos">
+					<p></p>
+					<form action="productos.php" method="post" class="form-mis-productos">
+						<input type="hidden" name="id" value="<?php echo $result['id']; ?>">
+						<button type="submit" name="action" class="boton boton-amarillo" value="form_producto">Editar producto</button>
+						<button type="submit" name="action" class="boton boton-rojo" value="form_producto">Eliminar producto</button>
+					</form>
+
+
+				</div>
+				</div>
 
 				<?php
-				foreach($result as $key => $value){
+				/*foreach($result as $key => $value){
 					echo $key.": ".$value."<br>";
-				}
-				echo '</div><br>';
+						}*/
+				echo '</div>';
 				$result = $results->fetch(PDO::FETCH_ASSOC);
 				
 			}
